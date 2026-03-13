@@ -199,14 +199,14 @@ Konfiguration: `/hooks` oder `.claude/settings.json`
 
 ## MCP (Model Context Protocol)
 
-MCP verbindet Claude mit externen Datenquellen. Konfiguration via `.mcp.json` im Projekt-Root:
+MCP verbindet Claude mit externen Datenquellen und Tools. Konfiguration via `.mcp.json` im Projekt-Root:
 
 ```json
 {
   "mcpServers": {
-    "supabase": {
+    "chrome-devtools": {
       "command": "npx",
-      "args": ["-y", "@supabase/mcp"]
+      "args": ["chrome-devtools-mcp@latest"]
     }
   }
 }
@@ -214,7 +214,32 @@ MCP verbindet Claude mit externen Datenquellen. Konfiguration via `.mcp.json` im
 
 Claude erkennt die Datei automatisch und hat sofort Zugriff auf die konfigurierten Tools.
 
-→ Siehe **Handout: MCP Use Cases** für konkrete Beispiele.
+### Chrome DevTools MCP — Beispiel
+
+Der **Chrome DevTools MCP** (von Google) gibt Claude Code direkten Zugriff auf Chrome DevTools. Claude kann damit:
+
+- 🌐 **Seiten im Browser öffnen** und visuell prüfen
+- 🐛 **Console Logs & Network-Fehler** analysieren
+- 🎨 **DOM & CSS live inspizieren** — Styling-Probleme finden
+- ⚡ **Performance Traces** aufnehmen und auswerten
+- 🖱️ **User-Interaktionen simulieren** — Formulare ausfüllen, klicken, navigieren
+
+**Beispiel-Prompts:**
+```
+"Check ob die Seite auf localhost:4200 Styling-Probleme hat"
+"Warum laden die Bilder nicht? Schau dir die Network-Requests an"
+"Lauf einen Performance Audit auf localhost:4200"
+"Fülle das Formular aus und prüfe ob die Validierung funktioniert"
+```
+
+**Setup:**
+- Voraussetzung: Chrome/Chromium installiert, Node.js 20+
+- Läuft auf **Mac, Linux und Windows**
+- Windows mit WSL: `cmd.exe` als Command-Wrapper verwenden
+
+> Referenz: https://github.com/ChromeDevTools/chrome-devtools-mcp
+
+→ Siehe **Handout: MCP Use Cases** für weitere MCP-Server und Szenarien.
 
 ---
 

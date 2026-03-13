@@ -227,92 +227,86 @@ az extension add --name azure-devops
 
 ---
 
-## Exercise 5: MCP — Azure DevOps als Tool anbinden (15 min)
-**Demo oder Hands-On, je nach Setup**
+## Exercise 5: MCP — Chrome DevTools Demo (10 min)
+**Moderator-Demo**
 
 ### Ziel
-Verstehen, was MCP (Model Context Protocol) ist und wie es Claude Code zu einem vollwertigen DevOps-Agenten macht.
+Verstehen, was MCP (Model Context Protocol) ist und wie es Claude Code mit externen Tools verbindet.
 
 ### Was ist MCP?
 MCP ist ein offener Standard, der AI-Assistenten mit externen Datenquellen und Tools verbindet — wie USB für AI. Statt Claude manuell Befehle einzutippen, bekommt Claude **direkte Tool-Zugriffe**.
 
-### Setup: Azure DevOps MCP Server
+### Setup: Chrome DevTools MCP
 
-Der offizielle **Microsoft Azure DevOps MCP Server** verbindet Claude Code direkt mit Azure DevOps:
+Der offizielle **Chrome DevTools MCP Server** (von Google) gibt Claude Code direkten Zugriff auf Chrome DevTools — DOM, CSS, Console, Network, Performance Traces.
 
 ```json
 // .mcp.json im Projekt-Root
 {
   "mcpServers": {
-    "azure-devops": {
+    "chrome-devtools": {
       "command": "npx",
-      "args": ["-y", "@azure-devops/mcp", "garaio-allpura"]
+      "args": ["chrome-devtools-mcp@latest"]
     }
   }
 }
 ```
 
-```bash
-# Voraussetzung: Node.js 20+, az login
-npm install -g @azure-devops/mcp  # oder via npx (siehe oben)
-```
+**Voraussetzungen:** Node.js 20+, Chrome/Chromium installiert.
+Läuft auf **Mac, Linux und Windows**.
 
-### Was kann der Azure DevOps MCP?
+> Referenz: https://github.com/ChromeDevTools/chrome-devtools-mcp
+
+### Was kann der Chrome DevTools MCP?
 
 | Tool | Beschreibung |
 |------|-------------|
-| Work Items | Abfragen, erstellen, aktualisieren |
-| Pull Requests | Auflisten, Reviews, Kommentare |
-| Pipelines | Build-Status, Runs triggern |
-| Repos | Code durchsuchen, Branches |
-| Test Plans | Test Cases, Test Runs |
-| Wiki | Dokumentation lesen und bearbeiten |
+| **Browser steuern** | Seiten öffnen, navigieren, User-Interaktionen simulieren |
+| **DOM & CSS inspizieren** | Elemente finden, Styling-Probleme diagnostizieren |
+| **Console & Network** | Fehler analysieren, CORS-Probleme finden, API-Calls prüfen |
+| **Performance Traces** | Aufnehmen, analysieren, Bottlenecks identifizieren |
+| **Screenshots** | Visuell verifizieren ob Änderungen korrekt sind |
 
-### Demo-Aufgaben
+### Demo-Szenario (Kalkulationstool Frontend)
 
-1. **Natürliche Sprache statt CLI** (3 min)
+1. **Seite prüfen** (3 min)
    ```
-   Zeig mir alle offenen Bugs im aktuellen Sprint.
+   Öffne localhost:4200 im Browser und prüfe ob es Styling-Probleme gibt.
    ```
    
-   → Claude nutzt automatisch das MCP Work Items Tool (kein `az boards query` nötig!)
+   → Claude öffnet Chrome, inspiziert DOM/CSS, meldet Findings
 
-2. **Sprint-Analyse** (5 min)
+2. **Fehler diagnostizieren** (3 min)
    ```
-   Analysiere den aktuellen Sprint:
-   - Wie viele Items sind offen vs. abgeschlossen?
-   - Welche Items sind at risk?
-   - Wann wurde zuletzt deployed?
+   Warum laden einige Elemente auf der Seite nicht?
+   Schau dir die Console Logs und Network-Requests an.
    ```
+   
+   → Claude analysiert Console-Errors und fehlgeschlagene Requests
 
-3. **Pipeline + Code verknüpfen** (5 min)
+3. **Performance Audit** (4 min)
    ```
-   Check den Status der CI Pipeline.
-   Wenn der letzte Build fehlgeschlagen ist — 
-   finde die Ursache im Code.
+   Die Seite lädt langsam. Mach einen Performance Audit 
+   und schlag konkrete Verbesserungen vor.
    ```
+   
+   → Claude nimmt einen Performance Trace auf, analysiert LCP/CLS/FID
 
-4. **Work Item erstellen** (2 min)
-   ```
-   Erstelle ein neues Bug Work Item:
-   Titel: "Security: Fehlende [Authorize] Attribute auf Debug-Endpoints"
-   Basierend auf unserem Fix aus Exercise 3.
-   ```
+### Weitere MCP-Server (Ausblick)
 
-### Vergleich: CLI vs MCP
+| MCP Server | Use Case |
+|-----------|----------|
+| **Azure DevOps MCP** | Work Items, PRs, Pipelines direkt aus Claude |
+| **Supabase/Postgres MCP** | Live-DB-Abfragen für Debugging |
+| **Sentry MCP** | Error-Triage und Monitoring |
+| **Slack MCP** | Team-Kommunikation durchsuchen |
 
-| | Azure CLI | MCP |
-|---|-----------|-----|
-| **Setup** | `az login` + Extension | `.mcp.json` + npx |
-| **Nutzung** | Claude generiert CLI-Befehle | Claude ruft Tools direkt auf |
-| **Flexibilität** | Alles möglich (WIQL, etc.) | Vordefinierte Tools |
-| **Vorteil** | Kein Setup nötig, überall verfügbar | Natürlicher, weniger Fehler, kein Copy-Paste |
-| **Ideal für** | Ad-hoc Abfragen, Scripting | Tägliche Arbeit, Integration |
+→ Siehe **Handout: MCP Use Cases** für die vollständige Liste.
 
 ### Takeaway
 > **MCP = USB für AI** — einmal eingesteckt, funktioniert es einfach.
-> Azure DevOps MCP macht Claude zum vollwertigen Projektmanagement-Assistenten.
-> In Kombination mit Code-Zugriff entsteht ein **geschlossener Loop**: Issue → Code → Test → Deploy.
+> Chrome DevTools MCP macht Claude zum **Full-Stack-Debugger**: Code lesen, ändern UND im Browser verifizieren.
+> In Kombination entsteht ein **geschlossener Loop**: Issue → Code → Test → Visuell prüfen → Deploy.
 
 ---
 
