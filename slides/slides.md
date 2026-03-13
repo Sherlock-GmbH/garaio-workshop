@@ -32,15 +32,18 @@ Und vor allem: ihr werdet heute selber coden. Mit Claude Code, eurem eigenen Rep
 | Block | Zeit | Inhalt |
 |-------|------|--------|
 | 🧠 Intro | 09:00–09:30 | Warum 95% scheitern |
-| 🔄 AI-First Lifecycle | 09:30–10:30 | Der komplette Workflow |
-| ☕ Pause | 10:30–10:45 | |
-| 🛠️ Hands-On | 10:45–11:45 | Bugs fixen im Kalkulationstool |
-| 💬 Q&A | 11:45–12:15 | Diskussion |
+| 🛠️ Claude Code | 09:30–10:15 | Hands-On: Das Tool kennenlernen |
+| ☕ Pause | 10:15–10:30 | |
+| 🔄 AI-First Lifecycle | 10:30–11:15 | Req → Spec → Code → Test → Deploy → Ops |
+| 🏋️ Exercises | 11:15–11:55 | Bug Fix, Security, DevOps |
+| 💬 Wrap-Up | 11:55–12:15 | Showcase + Q&A |
 
 <!--
 Das ist unser Plan für die nächsten 3 Stunden.
 
-Der wichtigste Teil ist das Hands-On — ihr arbeitet mit eurem eigenen Repo. Alles davor ist Kontext, damit ihr wisst WARUM ihr es so macht, nicht nur WIE.
+Zuerst: Warum scheitern fast alle mit AI? Dann lernt ihr Claude Code kennen — hands-on, im echten Repo. Nach der Pause gehen wir den kompletten Lifecycle durch, Phase für Phase mit Demo. Und dann fixxt ihr selber Bugs und Security Issues.
+
+Wenn Teil 2 länger dauert, kürze ich bei Teil 3. Wichtiger ist, dass ihr das Tool versteht.
 -->
 
 ---
@@ -158,7 +161,7 @@ Kurzer Exkurs: Warum kann euch niemand sagen "so macht man AI richtig"?
 
 Weil nicht mal die Leute die diese Modelle bauen vollständig verstehen warum sie funktionieren. Das Stichwort heisst "Emergent Abilities" — Fähigkeiten die ab einer bestimmten Modellgrösse plötzlich auftauchen, ohne dass man darauf trainiert hat.
 
-Ilya Sutskever — einer der OpenAI-Gründer — hat 2022 getweeted, die Modelle könnten "leicht bewusst" sein. Massive Kontroverse, aber es zeigt: selbst die Macher staunen über ihre eigenen Systeme.
+Ilya Sutskever — einer der OpenAI-Gründer — hat 2022 getweetet, die Modelle könnten "leicht bewusst" sein. Massive Kontroverse, aber es zeigt: selbst die Macher staunen über ihre eigenen Systeme.
 
 Ergo: Jede Firma die euch eine "fertige Enterprise AI Transformation Roadmap" verkauft, lügt. Ihr müsst euren eigenen Weg finden. Ich kann heute einen Samen pflanzen — den Garten müsst ihr selbst anlegen.
 -->
@@ -185,15 +188,52 @@ Studien zeigen 2-3x Qualitätssteigerung allein durch konsequentes Verifizieren.
 -->
 
 ---
+
+# Wo lernen?
+
+<div class="grid grid-cols-2 gap-8 mt-8">
+<div>
+
+### github.com/anthropics
+- Beispiele für CLAUDE.md, Skills, Plugins
+- Open-Source Repos mit Best Practices
+- Claude Code selbst ist Open Source
+
+</div>
+<div>
+
+### Boris Cherny (@bcherny)
+- Creator von Claude Code
+- Teilt öffentlich wie Anthropic Claude Code nutzt
+- Praxis-Tipps direkt vom Macher
+
+</div>
+</div>
+
+<br>
+
+> **Tipp:** Schaut euch an wie Anthropic selbst ihre Repos strukturiert — das sind die besten Vorlagen.
+
+<!--
+Zwei Quellen die ich euch mitgeben will:
+
+Erstens: github.com/anthropics — Anthropics eigene Repos. Da findet ihr echte Beispiele für CLAUDE.md Dateien, Skills, Plugins. Claude Code selbst ist Open Source. Schaut euch an wie die Macher ihre eigenen Tools strukturieren — das sind die besten Vorlagen.
+
+Zweitens: Boris Cherny auf X — @bcherny. Er ist der Creator von Claude Code und teilt regelmässig wie sie intern damit arbeiten. Sehr praxisnah, keine Marketing-Slides. Folgt dem wenn ihr am Ball bleiben wollt.
+-->
+
+---
 layout: center
 ---
 
-# Teil 2: AI-First Lifecycle
+# Teil 2: Claude Code kennenlernen
 
-### Requirements → Spec → Code → Test → Deploy → Ops
+### Konzepte und Grundlagen
 
 <!--
-Jetzt wird's konkret. Wir gehen den kompletten Lifecycle durch — von der Anforderung bis zum laufenden System. An jedem Schritt: wo arbeitet der Agent, wo der Mensch.
+Jetzt lernt ihr das Tool kennen. Nicht zuschauen — selber machen. Öffnet euer Terminal, geht ins Kalkulationstool-Repo.
+
+Wir gehen Schritt für Schritt durch: Was ist Claude Code, wie bedient man es, was sind die wichtigsten Konzepte.
 -->
 
 ---
@@ -204,18 +244,18 @@ Jetzt wird's konkret. Wir gehen den kompletten Lifecycle durch — von der Anfor
 <div>
 
 ### 🤖 Copilot
-- Autocomplete auf Steroiden
-- Reagiert auf deinen Cursor
-- Zeile für Zeile
-- GitHub Copilot, Cursor Tab
+- Code-Vervollständigung im Editor
+- Reagiert auf aktuelle Zeile/Datei
+- Eingebettet in IDE, Office, Teams
+- GitHub Copilot, M365 Copilot
 
 </div>
 <div>
 
 ### 🧠 Agent
-- Autonome Tasks
-- Liest, plant, implementiert
-- Ganze Features
+- Autonome, mehrstufige Tasks
+- Liest, plant, implementiert, testet
+- Arbeitet über Dateigrenzen hinweg
 - Claude Code, Copilot Agent Mode
 
 </div>
@@ -223,166 +263,448 @@ Jetzt wird's konkret. Wir gehen den kompletten Lifecycle durch — von der Anfor
 
 <br>
 
-> Beides hat seinen Platz — aber der **Hebel** liegt bei Agents.
+> Selbst Microsoft geht von Copilot → Agents: **"Copilot Cowork"** (März 2026) bettet Agents direkt in M365 ein.
 
 <!--
 Kurz der Unterschied, weil das oft verwechselt wird.
 
-Copilot: ihr tippt, es vervollständigt. Gut für Boilerplate, Autocomplete, schnelle Snippets. Das kennt ihr von GitHub Copilot.
+Copilot: ihr tippt, es vervollständigt. Gut für Boilerplate, Autocomplete, schnelle Snippets. Das kennt ihr von GitHub Copilot. Oder M365 Copilot — der hilft euch in Word, Excel, Teams. Immer eingebettet, immer reaktiv.
 
 Agent: ihr gebt eine Aufgabe, der Agent erledigt sie. Er liest den Code, versteht den Kontext, plant eine Lösung, implementiert sie, testet sie. Claude Code ist so ein Agent.
+
+Fun Fact: Selbst Microsoft bewegt sich in Richtung Agents. Anfang März haben sie "Copilot Cowork" angekündigt — Wave 3 von M365 Copilot. Agents die autonom in euren Business-Workflows arbeiten, nicht nur assistieren. Die sagen selber: der nächste Schritt nach Copilot sind Agents.
 
 Beides hat seinen Platz. Aber der grosse Hebel — die 10x Produktivitätssteigerung — kommt von Agents. Nicht von schnellerem Autocomplete.
 -->
 
 ---
 
-# Context Engineering
+# Claude Code Cheatsheet
 
-<div class="text-center mt-8">
-<h2 class="text-4xl">CLAUDE.md < 100 Zeilen</h2>
-<p class="text-xl mt-4 text-gray-500">Concise & ruthless</p>
+<div class="grid grid-cols-2 gap-6 mt-4">
+<div>
+
+### Navigation
+| Befehl | Funktion |
+|--------|----------|
+| `claude` | Starten |
+| `Ctrl+C` | Abbrechen |
+| `Ctrl+D` | Beenden |
+| `/help` | Hilfe |
+| `/clear` | Context leeren |
+| `/compact` | Context komprimieren |
+
+</div>
+<div>
+
+### Arbeiten
+| Befehl | Funktion |
+|--------|----------|
+| `/plan` | Plan-Modus |
+| `Shift+Tab` | Multi-line Input |
+| `@file.ts` | Datei referenzieren |
+| `#pattern` | Dateien suchen |
+| Bild einfügen | Screenshot/Mockup |
+
+</div>
 </div>
 
 <br>
 
-```markdown
-# CLAUDE.md
-## Project Overview
-.NET 8 API + Angular 19 Frontend, CQRS, Azure SQL
-
-## Build & Run
-dotnet build / ng serve
-
-## Architecture
-Commands in Api.Core/Commands/, Queries in Api.Core/Queries/
-```
-
-<br>
-
-> **Garbage in, garbage out** — der Agent ist nur so gut wie sein Kontext.
+> **Kurzreferenz:** [output/referenz-claude-code.md](https://github.com/Sherlock-GmbH/garaio-workshop/blob/main/output/referenz-claude-code.md) — **Jetzt ausprobieren:** `/help` eingeben
 
 <!--
-Context Engineering ist DER Skill für die Arbeit mit AI Agents.
+Das sind die wichtigsten Befehle. Geht die jetzt durch — tippt /help ein, schaut euch die Ausgabe an. Dann /compact um den Context zu komprimieren.
 
-CLAUDE.md ist eine Datei im Repo-Root, die Claude Code automatisch liest. Darin steht: Was ist das Projekt, wie baut man es, wie ist die Architektur, was sind die Konventionen.
+Shift+Tab ist wichtig für mehrzeilige Eingaben. @-Mention um Dateien direkt in den Prompt zu ziehen. Und ihr könnt Screenshots einfügen — Claude versteht Bilder.
 
-Wichtig: Unter 100 Zeilen. Concise and ruthless. Alles was drinsteht wird bei JEDER Interaktion geladen. Zu viel Kontext = Agent wird langsam und verwirrt.
-
-Garbage in, garbage out. Wenn CLAUDE.md Müll ist, ist der Output Müll. Wenn sie gut ist, ist der Agent sofort produktiv.
+Probiert 2-3 Befehle aus. Ihr habt 3 Minuten.
 -->
 
 ---
 
-# Explore → Plan → Code
+# Was ist Context?
 
-<div class="grid grid-cols-3 gap-6 mt-12">
-<div class="text-center">
+<div class="mt-8">
 
-### 🔍 Explore
-Problem verstehen.
-Code lesen. Fragen stellen.
+### Claude sieht bei jeder Nachricht:
 
-*"Wo wird ein Vertrag aus einer Offerte erstellt?"*
+<v-clicks>
 
-</div>
-<div class="text-center">
+1. **CLAUDE.md** — Projekt-Kontext, Architektur, Konventionen (immer geladen)
+2. **Conversation** — Alles was ihr bisher geschrieben habt
+3. **Tool Results** — Dateien die Claude gelesen hat, Befehle die es ausgeführt hat
+4. **@ Mentions** — Dateien die ihr explizit referenziert
 
-### 📋 Plan
-Lösung planen.
-Spec schreiben. Approach definieren.
-
-*"Schreib eine Spec mit 3-5 Punkten für den Fix."*
+</v-clicks>
 
 </div>
-<div class="text-center">
 
-### 💻 Code
-Implementieren.
-Tests zuerst. Dann Code.
+<br>
 
-*"Implementiere den Fix und schreib einen Unit Test."*
+> Context Window ≈ 200K Tokens. Wenn voll → `/compact`
+
+<!--
+Wichtiges Konzept: Context. Was "sieht" Claude eigentlich?
+
+CLAUDE.md wird immer geladen — darum muss sie kurz und präzise sein. Dann die Conversation — alles was ihr bisher gesagt habt. Dann Tool Results — wenn Claude eine Datei liest oder einen Befehl ausführt, landet das im Context. Und @-Mentions — Dateien die ihr direkt reingezogen habt.
+
+Das Context Window ist begrenzt — ca. 200K Tokens. Wenn es voll wird, merkt ihr das daran dass Claude vergesslich wird. Dann /compact um zusammenzufassen und Platz zu schaffen.
+
+Darum: CLAUDE.md kurz halten. Nicht jede Datei referenzieren. Gezielt arbeiten.
+-->
+
+---
+
+# Permissions & Trust
+
+<div class="mt-8">
+
+### Claude fragt bevor es handelt:
+
+<v-clicks>
+
+- 📖 **Lesen** — immer erlaubt
+- ✏️ **Schreiben** — fragt nach Bestätigung
+- ⚡ **Bash Commands** — fragt nach Bestätigung
+- ✅ **"Yes to all"** — Trust-Modus (Vorsicht!)
+
+</v-clicks>
+
+</div>
+
+<br>
+
+> **Tipp:** Akzeptiert einzeln, bis ihr euch sicher fühlt. Dann ggf. "Yes to all" für den Rest der Session.
+
+<!--
+Wichtig zu verstehen: Claude fragt euch bevor es Dateien ändert oder Befehle ausführt. Ihr seht genau was es tun will und könnt ablehnen.
+
+Lesen ist immer erlaubt — Claude kann jede Datei im Repo lesen. Aber Schreiben und Bash Commands brauchen eure Bestätigung.
+
+Es gibt einen "Yes to all" Modus — da akzeptiert Claude alles automatisch. Nutzt das erst wenn ihr euch sicher fühlt. Am Anfang lieber einzeln bestätigen, damit ihr seht was passiert.
+
+Das ist Verification First in der Praxis: Ihr seid der Gatekeeper.
+-->
+
+---
+
+# Slash Commands & Tools
+
+<div class="grid grid-cols-2 gap-6 mt-8">
+<div>
+
+### Slash Commands
+- `/plan` — Plan-Modus (kein Code)
+- `/compact` — Context komprimieren
+- `/clear` — Neuer Start
+- `/help` — Übersicht
+- `/review` — Code Review
+
+</div>
+<div>
+
+### Was Claude kann
+- Dateien lesen & schreiben
+- Bash Commands ausführen
+- Tests laufen lassen
+- Git Operationen
+- Bilder verstehen
+- Web suchen (mit MCP)
 
 </div>
 </div>
 
 <br>
 
-> **Nie direkt loscodieren.** Erst verstehen, dann planen, dann umsetzen.
+> **Jetzt:** `/plan Erkläre mir die Ordnerstruktur dieses Projekts` — Plan-Modus = keine Änderungen
 
 <!--
-Der wichtigste Workflow wenn ihr mit einem AI Agent arbeitet: Explore, Plan, Code.
+Slash Commands sind Shortcuts für häufige Aktionen. Der wichtigste: /plan. Im Plan-Modus analysiert Claude nur — es ändert keine Dateien. Perfekt zum Erkunden.
 
-Explore: Der Agent liest den Code, versteht das Problem, stellt euch Fragen. IHR stellt dem Agent Fragen. "Wo im Code passiert X?" "Welche Dateien sind betroffen?"
+Probiert jetzt: "/plan Erkläre mir die Ordnerstruktur dieses Projekts". Claude wird die Struktur analysieren ohne etwas zu ändern.
 
-Plan: BEVOR eine einzige Zeile Code geschrieben wird, lasst den Agent einen Plan schreiben. Was wird geändert, warum, welche Risiken gibt es.
-
-Code: Erst jetzt wird implementiert. Und zwar idealerweise: Test zuerst, dann Code.
-
-Der häufigste Fehler: direkt loscodieren ohne Explore und Plan. Dann fixen wir das Falsche oder machen mehr kaputt als wir reparieren.
+Das ist der sichere Weg um ein Projekt kennenzulernen. Erst /plan, dann wenn ihr den Plan gut findet, lasst ihr Claude implementieren.
 -->
 
 ---
 
-# Agent Teams + MCP
+# MCP — USB für AI
 
 <div class="grid grid-cols-2 gap-8 mt-8">
 <div>
 
-### Agent Teams
-- Mehrere Agents parallel
-- Einer plant, einer coded, einer testet
-- Git Worktrees für Isolation
-- `claude --worktree`
+### Was ist MCP?
+- **Model Context Protocol**
+- Offener Standard
+- Verbindet AI mit externen Tools
+- Wie USB — Plug & Play
 
 </div>
 <div>
 
-### MCP (Model Context Protocol)
-- **USB für AI** — Plug & Play
-- Agent greift auf externe Tools zu
-- DB, DevOps, Monitoring, Slack
-- Offener Standard
+### Beispiele
+- 🗄️ Datenbank abfragen
+- 📋 DevOps Work Items lesen
+- 💬 Slack durchsuchen
+- 📊 Monitoring-Daten abrufen
 
 </div>
 </div>
+
+<br>
+
+```json
+// .mcp.json im Projekt-Root
+{ "mcpServers": { "supabase": { "command": "npx", "args": ["-y", "@supabase/mcp"] } } }
+```
 
 <!--
-Zwei Ausblicke die ihr im Hinterkopf behalten solltet:
+MCP — Model Context Protocol: Ein offener Standard der AI Agents mit externen Tools verbindet. Wie USB — einmal eingesteckt, funktioniert's.
 
-Agent Teams: Statt einem Agent der alles macht, mehrere Agents die parallel arbeiten. Einer analysiert, einer implementiert, einer schreibt Tests. Claude Code unterstützt das über Git Worktrees.
+Eine JSON-Datei im Repo-Root, und Claude hat plötzlich Zugriff auf eure Datenbank, eure Work Items, euer Monitoring.
 
-MCP — Model Context Protocol: Ein offener Standard der AI Agents mit externen Tools verbindet. Wie USB — einmal eingesteckt, funktioniert's. Claude kann damit direkt auf eure Datenbank zugreifen, Azure DevOps Work Items lesen, Slack-Channels durchsuchen. Alles aus einer Oberfläche.
+Stellt euch vor: Bug Report kommt rein, Claude liest das Ticket aus Azure DevOps, schaut in die DB, findet den Bug im Code, schlägt einen Fix vor. Alles ohne Context-Switches.
 
-Dazu gibt's nachher noch ein Handout mit konkreten Use Cases.
+Dazu gibt's ein Handout mit konkreten Use Cases. Heute nutzen wir Azure CLI als Brücke zu DevOps.
+-->
+
+---
+layout: center
+---
+
+# ☕ Pause
+
+### 15 Minuten
+
+<!--
+15 Minuten Pause.
+
+Bitte prüft in der Pause:
+- Claude Code läuft? (claude --version)
+- Repo geklont?
+- Azure CLI eingeloggt?
+
+Falls ihr Fragen habt zu dem was wir bisher gemacht haben — jetzt ist ein guter Zeitpunkt.
+-->
+
+---
+layout: center
+---
+
+# Teil 3: AI-First Lifecycle
+
+### Requirements → Spec → Code → Test → Deploy → Ops
+
+<!--
+Jetzt wird's konkret. Wir gehen den kompletten Lifecycle durch — von der Anforderung bis zum laufenden System. An jedem Schritt: wo arbeitet der Agent, wo der Mensch. Pro Phase eine kurze Demo.
 -->
 
 ---
 
-# MCP in Aktion
+# Requirements
 
-```json
-// .mcp.json im Projekt-Root
-{
-  "mcpServers": {
-    "supabase": {
-      "command": "npx",
-      "args": ["-y", "@supabase/mcp"]
-    }
-  }
-}
+<div class="grid grid-cols-2 gap-8 mt-8">
+<div>
+
+### Mensch
+- Stakeholder-Gespräche
+- Business-Ziel definieren
+- Priorisierung
+
+</div>
+<div>
+
+### Agent
+- Bestehenden Code analysieren
+- Impact Assessment
+- Fragen generieren die ihr vergessen habt
+
+</div>
+</div>
+
+<br>
+
+**Demo:**
+```
+Lies Bug #191 in todo.md. Welche Fragen müsste ich dem
+Product Owner stellen, bevor ich das fixe?
+```
+
+<!--
+Requirements: Der Mensch definiert WAS und WARUM. Der Agent hilft beim Analysieren.
+
+(DEMO: Claude liest den Bug, analysiert den Code, generiert Rückfragen)
+
+Seht ihr — Claude stellt Fragen die ihr vielleicht nicht gestellt hättet. "Welche Zeitzonen sind relevant?" "Gibt es andere Stellen mit dem gleichen Pattern?" Das ist der Mehrwert: die AI denkt an Edge Cases.
+
+Aber die Entscheidung welche Requirements wichtig sind — das bleibt beim Menschen.
+-->
+
+---
+
+# Spec
+
+<div class="grid grid-cols-2 gap-8 mt-8">
+<div>
+
+### Mensch
+- Approach entscheiden
+- Risiken bewerten
+- Scope definieren
+
+</div>
+<div>
+
+### Agent
+- Spec schreiben (Explore → Plan)
+- Betroffene Dateien identifizieren
+- Alternativen vorschlagen
+
+</div>
+</div>
+
+<br>
+
+**Demo:**
+```
+/plan Schreib eine Spec für den Fix von Bug #191.
+Max 5 Punkte. Identifiziere betroffene Dateien.
+```
+
+<!--
+Spec: Der Agent schreibt einen Plan, der Mensch entscheidet ob er stimmt.
+
+(DEMO: /plan Modus — Claude analysiert und schreibt eine Spec)
+
+Wichtig: /plan Modus. Claude ändert nichts, es plant nur. Ihr seht den Plan, prüft ihn, und DANN gebt ihr grünes Licht.
+
+Das ist Explore → Plan in der Praxis. Nie direkt loscodieren.
+-->
+
+---
+
+# Code
+
+<div class="grid grid-cols-2 gap-8 mt-8">
+<div>
+
+### Mensch
+- Plan reviewen und freigeben
+- Diffs prüfen
+- Jede Änderung verstehen
+
+</div>
+<div>
+
+### Agent
+- Implementieren nach Spec
+- Tests zuerst schreiben
+- Refactoring vorschlagen
+
+</div>
+</div>
+
+<br>
+
+**Demo:**
+```
+Implementiere den Fix nach der Spec.
+Schreib zuerst einen Unit Test der das Problem reproduziert.
+```
+
+<!--
+Code: Jetzt wird implementiert. Aber — Test zuerst.
+
+(DEMO: Claude schreibt erst den Test, dann den Fix)
+
+Achtet darauf was Claude macht: Es schreibt erst einen Test der fehlschlägt, dann den Fix der den Test grün macht. Das ist TDD — und die AI macht es automatisch wenn ihr es so promptet.
+
+Und ihr seht jeden Diff. Akzeptiert nicht blind. Lest den Code. Verification First.
+-->
+
+---
+
+# Test
+
+<div class="grid grid-cols-2 gap-8 mt-8">
+<div>
+
+### Mensch
+- Test-Strategie definieren
+- Edge Cases identifizieren
+- Akzeptanzkriterien prüfen
+
+</div>
+<div>
+
+### Agent
+- Unit Tests schreiben
+- Integration Tests
+- Edge Cases abdecken
+- Tests ausführen und Fehler fixen
+
+</div>
+</div>
+
+<br>
+
+**Demo:**
+```
+Führe die Tests aus. Wenn einer fehlschlägt, analysiere warum
+und fixe es.
 ```
 
 <br>
 
-**Demo:** Claude spricht direkt mit der Datenbank
+> **Frontend-Testing:** [agent-browser.dev](https://agent-browser.dev/) — Agent steuert den Browser, testet UI visuell
 
 <!--
-So sieht das konkret aus. Eine JSON-Datei im Repo-Root, und Claude Code hat plötzlich Zugriff auf eure Datenbank.
+Test: Die AI ist extrem gut darin Tests zu schreiben und auszuführen. Aber IHR definiert was getestet werden soll.
 
-(LIVE DEMO: Supabase MCP zeigen — Claude fragt die DB ab, zeigt Schema, findet Daten)
+(DEMO: Tests laufen lassen, ggf. Fehler fixen)
 
-Stellt euch vor: Bug Report kommt rein, Claude liest das Ticket aus Azure DevOps, schaut in die DB ob die Daten stimmen, findet den Bug im Code, und schlägt einen Fix vor. Alles ohne dass ihr zwischen Browser, Terminal und IDE wechselt.
+Der Agent kann den Red-Green-Refactor Cycle komplett alleine durchlaufen. Aber die Frage "testen wir das Richtige?" — das ist euer Job.
+
+Für Frontend gibt's spannende Entwicklungen: agent-browser.dev — ein Tool das dem Agent einen echten Browser gibt. Der Agent kann die UI visuell testen, Screenshots machen, Buttons klicken. Nicht nur Unit Tests, sondern echtes E2E-Testing gesteuert vom Agent.
+-->
+
+---
+
+# Deploy & Ops
+
+<div class="grid grid-cols-2 gap-8 mt-8">
+<div>
+
+### Deploy
+- PR erstellen mit Summary
+- CI/CD Pipeline analysieren
+- Deployment-Risiken bewerten
+
+</div>
+<div>
+
+### Ops
+- Logs analysieren
+- Incidents debuggen
+- Monitoring-Queries schreiben
+- Post-Mortems unterstützen
+
+</div>
+</div>
+
+<br>
+
+> **Tools:** CLI-Tools (az cli, gh, kubectl) + DevOps MCP Server + Hooks für Automatisierung
+
+<!--
+Deploy und Ops: Hier kommt alles zusammen.
+
+Deploy: Claude kann PRs erstellen, CI/CD Pipelines analysieren, Deployment-Risiken bewerten. Dafür nutzt ihr CLI-Tools wie az cli oder gh — Claude kann die direkt aufrufen. Oder einen DevOps MCP Server der das nativ integriert.
+
+Ops: Logs analysieren, Incidents debuggen, Monitoring-Queries schreiben. Mit dem richtigen MCP-Server kann Claude direkt in Grafana oder Datadog schauen.
+
+Und dann Hooks: Ihr könnt deterministische Schritte automatisieren. Z.B. nach jedem Commit automatisch Linting laufen lassen. Oder nach jedem PR automatisch einen Security-Check triggern. Hooks sind der Klebstoff zwischen Agent und eurer Pipeline.
 -->
 
 ---
@@ -410,43 +732,28 @@ Stellt euch vor: Bug Report kommt rein, Claude liest das Ticket aus Azure DevOps
 <!--
 Das ist die Vision: Ein geschlossener Loop. Vom Issue über Code und Tests bis zum PR und Monitoring. Alles in einem Tool.
 
-Heute zeigen wir euch die ersten Schritte dieses Loops im Hands-On.
+Ihr habt heute die Mitte kennengelernt — Code verstehen, Fix implementieren, Tests schreiben. Die äusseren Schichten kommen mit MCP-Servern dazu.
+
+Jetzt wendet ihr das Gelernte an.
 -->
 
 ---
 layout: center
 ---
 
-# ☕ Pause
-
-### 15 Minuten — danach wird's praktisch
-
-<!--
-15 Minuten Pause. Danach arbeitet ihr selber.
-
-Bitte prüft in der Pause:
-- Claude Code läuft? (claude --version)
-- Repo geklont?
-- Azure CLI eingeloggt?
--->
-
----
-layout: center
----
-
-# Teil 3: Hands-On
+# Teil 4: Exercises
 
 ### Echte Bugs. Echtes Repo. Echte Security Issues.
 
 <!--
 Jetzt wird's ernst. Ihr arbeitet mit dem echten Kalkulationstool-Repo. Echte Bugs, echte Security Issues — keine Spielzeug-Beispiele.
 
-Die Exercises sind so aufgebaut, dass ihr den Explore-Plan-Code Workflow selber durchspielt.
+Nutzt den Explore-Plan-Code Workflow den ihr gerade gesehen habt.
 -->
 
 ---
 
-# Setup-Check (5 min)
+# Setup & Init (5 min)
 
 ```bash
 cd Kalkulationstool
@@ -455,50 +762,35 @@ claude
 
 Im Claude-Prompt:
 ```
-Was ist dieses Projekt? Gib mir einen kurzen Überblick.
+/init
 ```
+
+✅ Claude erstellt eine CLAUDE.md für das Projekt
 
 <br>
 
-✅ Claude sollte CLAUDE.md lesen und die Architektur erklären
+Dann:
+```
+Was ist dieses Projekt? Gib mir einen kurzen Überblick.
+```
+
+✅ Claude sollte die neue CLAUDE.md lesen und die Architektur erklären
 
 <!--
-Erster Schritt: Stellt sicher dass alles läuft. 
+Erster Schritt: Stellt sicher dass alles läuft.
 
-Öffnet das Terminal im Kalkulationstool-Ordner. Startet Claude. Fragt "Was ist dieses Projekt?"
+Öffnet das Terminal im Kalkulationstool-Ordner. Startet Claude Code.
 
-Claude sollte CLAUDE.md automatisch lesen und euch die Architektur erklären: .NET 8, Angular 19, CQRS, Azure. Wenn das funktioniert, seid ihr ready.
+Dann: /init — das ist der Befehl der eine CLAUDE.md erstellt. Claude analysiert euer Repo und generiert automatisch den Projekt-Kontext. Schaut euch an was rauskommt.
+
+Danach fragt: "Was ist dieses Projekt?" Claude sollte die neue CLAUDE.md nutzen und euch die Architektur erklären: .NET 8, Angular 19, CQRS, Azure.
 
 Wer Probleme hat: Hand hoch, wir helfen.
 -->
 
 ---
 
-# Exercise 1: Context Engineering (10 min)
-
-### CLAUDE.md verstehen
-
-1. **CLAUDE.md lesen** — `Zeig mir den Inhalt von CLAUDE.md`
-2. **Architektur-Fragen stellen:**
-   - *"Erkläre mir das CQRS Pattern in diesem Projekt."*
-   - *"Wie funktioniert die Authentifizierung?"*
-3. **Reflexion:** Was hat Claude aus CLAUDE.md gelernt? Was fehlt?
-
-<br>
-
-> **Takeaway:** CLAUDE.md < 100 Zeilen — concise & ruthless.
-
-<!--
-Exercise 1 ist Aufwärmen. Ihr schaut euch CLAUDE.md an und stellt Architektur-Fragen.
-
-Das Ziel: Versteht, WIE Claude den Kontext nutzt. Fragt nach CQRS, nach der Auth — seht wie Claude die Infos aus CLAUDE.md kombiniert mit dem Code.
-
-Und dann überlegt: Was fehlt in CLAUDE.md? Welche Infos wären nützlich gewesen?
--->
-
----
-
-# Exercise 2: Bug #191 fixen (20 min)
+# Exercise 1: Bug #191 fixen (20 min)
 
 ### Auftragsbeginn-Datum fällt um 1 Tag zurück 🐛
 
@@ -529,7 +821,7 @@ Ihr habt 20 Minuten. Das ist knapp — das ist Absicht. In der Praxis müsst ihr
 
 ---
 
-# Exercise 3: Security Issue (15 min)
+# Exercise 2: Security Issue (15 min)
 
 ### Fehlende `[Authorize]` Attribute 🔒
 
@@ -543,7 +835,7 @@ Ihr habt 20 Minuten. Das ist knapp — das ist Absicht. In der Praxis müsst ihr
 > **Takeaway:** AI findet Issues schnell — aber **du verifizierst**.
 
 <!--
-Exercise 3: Security. Im Repo liegt ein Security Audit Report mit 4 Findings. Ihr fokussiert auf Vulnerability 2: fehlende Authorize-Attribute.
+Exercise 2: Security. Im Repo liegt ein Security Audit Report mit 4 Findings. Ihr fokussiert auf Vulnerability 2: fehlende Authorize-Attribute.
 
 Lasst Claude den Report lesen, den Code finden, und den Fix implementieren. Aber — und das ist der Punkt — IHR prüft ob der Fix korrekt ist. Nicht blind akzeptieren.
 
@@ -552,7 +844,7 @@ Security Reviews sind ein perfekter AI Use Case. Die AI findet Muster schneller 
 
 ---
 
-# Exercise 4: Azure CLI — Work Items (10 min)
+# Exercise 3: Azure CLI — Work Items (10 min)
 
 ### Claude als DevOps-Assistent 🔧
 
@@ -575,9 +867,9 @@ Nimm Bug #191 — löst unser Fix das Problem?
 > **Takeaway:** Code ↔ Issues verknüpfen. Keine Context-Switches.
 
 <!--
-Exercise 4: Wir nutzen Claude als DevOps-Brücke. In todo.md stehen Azure CLI Befehle für Azure DevOps Work Items.
+Exercise 3: Wir nutzen Claude als DevOps-Brücke. In todo.md stehen Azure CLI Befehle für Azure DevOps Work Items.
 
-Lasst Claude die Befehle nutzen, einen Bug-Report erstellen, und den Fix aus Exercise 2 mit dem Work Item verknüpfen.
+Lasst Claude die Befehle nutzen, einen Bug-Report erstellen, und den Fix aus Exercise 1 mit dem Work Item verknüpfen.
 
 Das zeigt den Mehrwert: Claude versteht sowohl den Code als auch die Issues. Es kann beides verbinden — ohne dass ihr zwischen Browser und IDE wechselt.
 -->
@@ -606,10 +898,10 @@ Mich interessiert nicht nur die Lösung — mich interessiert der WEG. Welche Fr
 
 <v-clicks>
 
-1. **Explore → Plan → Code** — Nicht direkt loscodieren
-2. **Verification First** — AI macht Fehler. Prüfen, prüfen, prüfen
-3. **Context Engineering** — CLAUDE.md ist euer Freund
-4. **MCP = USB für AI** — Einmal eingesteckt, einfach nutzen
+1. **Verification First** — AI macht Fehler. Prüfen, prüfen, prüfen
+2. **Context Engineering** — CLAUDE.md ist euer Freund
+3. **Explore → Plan → Code** — Nicht direkt loscodieren
+4. **Agent > Copilot** — Der Hebel liegt bei autonomen Tasks
 5. **Geschlossener Loop** — Issue → Code → Test → Deploy aus einer Oberfläche
 
 </v-clicks>
@@ -619,9 +911,9 @@ Mich interessiert nicht nur die Lösung — mich interessiert der WEG. Welche Fr
 
 Fünf Dinge zum Mitnehmen.
 
-Explore Plan Code. Verification First. Context Engineering. MCP. Und das Ziel: ein geschlossener Loop ohne Context-Switches.
+Verification First — das Wichtigste. Context Engineering — CLAUDE.md gut pflegen. Explore Plan Code — nie direkt loscodieren. Agents statt Autocomplete. Und die Vision: ein geschlossener Loop.
 
-Davon ist heute Nummer 1-3 am wichtigsten. Das könnt ihr morgen sofort einsetzen. MCP und der geschlossene Loop kommen danach.
+1-3 könnt ihr morgen sofort einsetzen. Der Rest kommt mit der Zeit.
 -->
 
 ---

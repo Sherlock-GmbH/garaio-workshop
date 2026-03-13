@@ -140,6 +140,6 @@ Was ist dieses Projekt? Gib mir einen kurzen Überblick.
 
 ## Questions?
 
-Contact: [WILL_BE_PROVIDED]
+Contact: [github.com/haaslukas](https://github.com/haaslukas)
 
 See you at the workshop! 🚀

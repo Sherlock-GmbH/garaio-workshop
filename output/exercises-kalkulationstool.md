@@ -23,7 +23,7 @@ Im Claude prompt:
 Was ist dieses Projekt? Gib mir einen kurzen Überblick.
 ```
 
-Claude sollte CLAUDE.md lesen und die Architektur erklären (.NET 8 + Angular 19, CQRS, Azure).
+Zuerst `/init` ausführen um eine CLAUDE.md zu erstellen. Danach sollte Claude die Architektur erklären (.NET 8 + Angular 19, CQRS, Azure).
 
 ---
 
@@ -35,9 +35,9 @@ Verstehen, wie CLAUDE.md funktioniert und warum Context Engineering wichtig ist.
 
 ### Aufgabe
 
-1. **CLAUDE.md öffnen und lesen** (2 min)
+1. **CLAUDE.md erstellen** (2 min)
    ```
-   Zeig mir den Inhalt von CLAUDE.md
+   /init
    ```
 
 2. **Architektur-Fragen stellen** (5 min)
@@ -71,7 +71,7 @@ Vermutlich UTC/Timezone Off-by-One.
 ### Phase 1: Explore (5 min)
 
 ```
-Lies todo.md und erkläre mir Bug #191.
+Lies @todo.md und erkläre mir Bug #191.
 ```
 
 ```
@@ -361,7 +361,7 @@ Die 5 Exercises + Showcase passen nicht alle in 60 min. Empfohlene Kombinationen
 - **Fallback:** Wenn weder Azure CLI noch MCP verfügbar: die Befehle aus `todo.md` zeigen und erklären, wie Claude sie nutzt
 
 ### Häufige Probleme
-- **Claude findet CLAUDE.md nicht**: Working Directory prüfen, muss in `Kalkulationstool/` sein
+- **Claude findet CLAUDE.md nicht**: `/init` ausführen, Working Directory prüfen, muss in `Kalkulationstool/` sein
 - **API läuft nicht**: Für Exercises nicht nötig, ist reines Code-Reading
 - **Teilnehmer stuck**: Beispiel-Prompts vorzeigen, Pair Programming
 - **`az boards` schlägt fehl**: Org/Projekt als Default setzen: `az devops configure --defaults organization=https://dev.azure.com/garaio-allpura project=Kalkulationstool`
