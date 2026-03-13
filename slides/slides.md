@@ -144,25 +144,23 @@ Der Punkt ist nicht "seid chaotisch". Der Punkt ist: Neugier plus Struktur. Beid
 
 <v-clicks>
 
-- 🤯 **Emergent Abilities** — LLMs entwickeln Fähigkeiten die plötzlich und unerwartet auftauchen
-- 🔬 Kein wissenschaftlicher Konsens über die Erklärung
-- 💬 Ilya Sutskever (OpenAI Mitgründer, 2022): *"It may be that today's large neural networks are slightly conscious"*
-- 🤷 Wir können erklären WAS passiert, nicht vollständig WARUM
+- 2024: **Scaling Laws** galten als der Weg — dann kam die "Scaling Wall"-Debatte
+- 2024-25: **Reasoning-Modelle** (o1/o3, Extended Thinking) — vorher nicht auf der Roadmap
+- 2025-26: **Agentic Workflows**, Computer Use, MCP — vor 2 Jahren kannte niemand diese Patterns
+- Alle ~6 Monate ein neues Paradigma
 
 </v-clicks>
 
 <br>
 
-> Wenn nicht mal die Entwickler dieser Modelle erklären können warum sie so gut funktionieren — wer kann euch dann eine fertige Roadmap verkaufen?
+> Wenn sich alle 6 Monate das Paradigma ändert — wer verkauft euch eine 3-Jahres-Roadmap?
 
 <!--
-Kurzer Exkurs: Warum kann euch niemand sagen "so macht man AI richtig"?
+Warum kann euch niemand sagen "so macht man AI richtig"?
 
-Weil nicht mal die Leute die diese Modelle bauen vollständig verstehen warum sie funktionieren. Das Stichwort heisst "Emergent Abilities" — Fähigkeiten die ab einer bestimmten Modellgrösse plötzlich auftauchen, ohne dass man darauf trainiert hat.
+Schaut euch die letzten 18 Monate an: Erst hiess es, grössere Modelle lösen alles — Scaling Laws. Dann kam die Debatte ob Skalierung an Grenzen stösst. Plötzlich kamen Reasoning-Modelle wie o1 — die hatte fast niemand auf dem Radar. Und jetzt reden wir über Agents, Computer Use, MCP — Patterns die vor zwei Jahren nicht existierten.
 
-Ilya Sutskever — einer der OpenAI-Gründer — hat 2022 getweetet, die Modelle könnten "leicht bewusst" sein. Massive Kontroverse, aber es zeigt: selbst die Macher staunen über ihre eigenen Systeme.
-
-Ergo: Jede Firma die euch eine "fertige Enterprise AI Transformation Roadmap" verkauft, lügt. Ihr müsst euren eigenen Weg finden. Ich kann heute einen Samen pflanzen — den Garten müsst ihr selbst anlegen.
+Alle paar Monate ändert sich das Spielfeld fundamental. Jede Firma die euch eine "fertige Enterprise AI Transformation Roadmap" verkauft, lügt. Ihr müsst euren eigenen Weg finden. Ich kann heute einen Samen pflanzen — den Garten müsst ihr selbst anlegen.
 -->
 
 ---
