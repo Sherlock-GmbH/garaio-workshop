@@ -1,96 +1,87 @@
 # Hands-On Exercises: Kalkulationstool
 
-Diese Exercises nutzen das echte GARAIO Demo-Repo mit realen Bugs und Issues.
+Diese Exercises sind in den AI-First Lifecycle integriert. Pro Phase: kurz erklären, dann sofort hands-on.
 
 ---
 
-## Setup Check (5 min)
-**10:45–10:50**
+## Setup & Init (5 min)
+**10:30–10:35**
 
 ### Checkliste
 - [ ] Claude Code läuft (`claude --version`)
 - [ ] Repo geklont und im Terminal geöffnet
 - [ ] Im Repo-Root: `claude` starten
 
-### Quick Test
+### Aufgabe
 ```bash
 cd Kalkulationstool
 claude
 ```
 
-Im Claude prompt:
+Im Claude-Prompt:
+```
+/init
+```
+
+✅ Claude erstellt eine CLAUDE.md für das Projekt.
+
+Dann:
 ```
 Was ist dieses Projekt? Gib mir einen kurzen Überblick.
 ```
 
-Zuerst `/init` ausführen um eine CLAUDE.md zu erstellen. Danach sollte Claude die Architektur erklären (.NET 8 + Angular 19, CQRS, Azure).
+✅ Claude sollte die neue CLAUDE.md nutzen und die Architektur erklären (.NET 8 + Angular 19, CQRS, Azure).
 
 ---
 
-## Exercise 1: Context Engineering verstehen (10 min)
-**10:50–11:00**
+## Phase 1: Requirements (10 min)
+**10:35–10:45**
 
 ### Ziel
-Verstehen, wie CLAUDE.md funktioniert und warum Context Engineering wichtig ist.
+Bug #191 verstehen. Agent generiert Rückfragen die ihr vielleicht vergessen hättet.
 
 ### Aufgabe
 
-1. **CLAUDE.md erstellen** (2 min)
+1. **Bug lesen** (3 min)
    ```
-   /init
-   ```
-
-2. **Architektur-Fragen stellen** (5 min)
-   ```
-   Erkläre mir das CQRS Pattern in diesem Projekt. 
-   Wo liegen Commands, wo Queries?
+   Lies @todo.md und erkläre mir Bug #191.
    ```
 
+2. **Code finden** (4 min)
    ```
-   Wie funktioniert die Authentifizierung? 
-   Was ist x-ms-client-principal?
+   Wo im Code wird ein Vertrag aus einer Offerte erstellt?
+   Such nach "Vertrag erstellen" oder "Contract" Logik.
    ```
 
-3. **Reflexion** (3 min)
-   - Was hat Claude aus CLAUDE.md gelernt?
-   - Welche Infos fehlen, die hilfreich wären?
+3. **Rückfragen generieren** (3 min)
+   ```
+   Welche Fragen müsste ich dem Product Owner stellen,
+   bevor ich das fixe?
+   ```
 
 ### Takeaway
-> **CLAUDE.md < 100 Zeilen** — concise & ruthless. 
-> Garbage in, garbage out.
+> Agent denkt an Edge Cases. Aber die Entscheidung welche Requirements wichtig sind — das bleibt beim Menschen.
 
 ---
 
-## Exercise 2: Bug #191 fixen — Explore → Plan → Code (20 min)
-**11:00–11:20**
+## Phase 2: Spec (10 min)
+**10:45–10:55**
 
-### Der Bug
-Bei Umwandlung Offerte → Vertrag fällt das **Auftragsbeginn-Datum um 1 Tag zurück**. 
-Vermutlich UTC/Timezone Off-by-One.
+### Ziel
+Plan erstellen lassen, prüfen, freigeben.
 
-### Phase 1: Explore (5 min)
+### Aufgabe
 
-```
-Lies @todo.md und erkläre mir Bug #191.
-```
+1. **Spec schreiben** (5 min)
+   ```
+   /plan Schreib eine Spec für den Fix von Bug #191.
+   Max 5 Punkte. Identifiziere betroffene Dateien.
+   ```
 
-```
-Wo im Code wird ein Vertrag aus einer Offerte erstellt? 
-Such nach "Vertrag erstellen" oder "Contract" Logik.
-```
-
-```
-Zeig mir alle Stellen, wo Datums-Konvertierungen stattfinden. 
-Besonders interessant: UTC, ToLocalTime, DateTime vs DateTimeOffset.
-```
-
-### Phase 2: Plan (5 min)
-
-```
-Basierend auf deiner Analyse: 
-Was ist die wahrscheinliche Ursache für Bug #191?
-Schreib eine kurze Spec (3-5 Punkte) wie wir das fixen.
-```
+2. **Plan prüfen** (5 min)
+   - Stimmt die Ursache?
+   - Fehlen betroffene Dateien?
+   - Ist der Scope realistisch?
 
 Erwartete Erkenntnisse:
 - Frontend sendet lokale Zeit
@@ -98,91 +89,76 @@ Erwartete Erkenntnisse:
 - Bei der Rückgabe wird nicht korrekt konvertiert
 - Oder: JavaScript Date Objekt vs .NET DateTime Serialisierung
 
-### Phase 3: Code (10 min)
-
-```
-Implementiere den Fix für Bug #191 basierend auf deinem Plan.
-Erkläre jeden Schritt.
-```
-
-**Verification First!**
-```
-Schreib einen Unit Test, der das korrekte Datum-Verhalten verifiziert.
-```
-
 ### Takeaway
-> **Explore → Plan → Code** — nicht direkt loscodieren.
-> **Verification First** — Tests VOR dem Merge.
+> **Explore → Plan → Code** — nie direkt loscodieren. /plan Modus ändert nichts.
 
 ---
 
-## Exercise 3: Security Issue fixen (15 min)
-**11:20–11:35**
+## Phase 3: Code + Test (15 min)
+**10:55–11:10**
 
-### Das Problem
-Im Security Audit wurden fehlende `[Authorize]` Attribute gefunden.
+### Ziel
+Fix implementieren. Test zuerst.
 
 ### Aufgabe
 
-1. **Security Audit lesen** (3 min)
+1. **Unit Test schreiben** (5 min)
    ```
-   Lies security-audit-report.md und fasse die Findings zusammen.
-   Fokus auf Vulnerability #2 (Missing Authorize).
-   ```
-
-2. **Code finden** (3 min)
-   ```
-   Zeig mir UserController.cs. 
-   Welche Endpoints haben kein [Authorize] Attribut?
+   Schreib zuerst einen Unit Test der das Problem reproduziert.
    ```
 
-3. **Fix implementieren** (5 min)
+2. **Fix implementieren** (5 min)
    ```
-   Füge die fehlenden [Authorize] Attribute hinzu.
-   Die Debug-Endpoints (echo/*) sollen nur im Development verfügbar sein.
+   Implementiere den Fix basierend auf dem Plan.
+   Erkläre jeden Schritt.
    ```
 
-4. **Review** (4 min)
+3. **Tests ausführen** (5 min)
    ```
-   Erkläre mir, warum diese Änderungen die Sicherheit verbessern.
-   Gibt es noch andere Stellen im Code, die ähnliche Probleme haben könnten?
+   Führe die Tests aus. Wenn einer fehlschlägt,
+   analysiere warum und fixe es.
+   ```
+
+### Takeaway
+> **Verification First** — Tests VOR dem Merge. Jeden Diff prüfen.
+
+---
+
+## Querschnitt: Security (10 min)
+**11:10–11:20**
+
+### Ziel
+Agent als Security-Auditor. Fehlende `[Authorize]` Attribute finden und fixen.
+
+### Aufgabe
+
+1. **Security Review** (3 min)
+   ```
+   /security-review
+   ```
+
+2. **Codebase-weiter Audit** (3 min)
+   ```
+   Mach dasselbe für die gesamte Code-Base
+   und speichere in security-audit-report.md
+   ```
+
+3. **Fix** (4 min)
+   ```
+   Welche Endpoints haben kein [Authorize]?
+   Füge die fehlenden Attribute hinzu.
    ```
 
 ### Takeaway
 > AI findet Issues schnell — aber **du verifizierst**.
-> Security Reviews sind ein perfekter AI Use Case.
 
 ---
 
-## Showcase (10 min)
-**11:45–11:55** *(oder früher, je nach Fortschritt)*
-
-### Format
-2-3 Teilnehmer zeigen ihre Lösung (3 min pro Person):
-
-1. **Was war der Approach?**
-   - Welche Fragen hast du Claude gestellt?
-   - Wie war der Explore → Plan → Code Flow?
-
-2. **Was hat funktioniert?**
-   - Wo war Claude besonders hilfreich?
-
-3. **Was nicht?**
-   - Wo musstest du korrigieren?
-   - Was hat Claude falsch verstanden?
-
-### Diskussionsfragen
-- Wie unterscheidet sich das von "klassischem" Debugging?
-- Wo seht ihr den grössten Produktivitätsgewinn?
-- Was braucht noch Übung?
-
----
-
-## Exercise 4: Azure CLI — Work Items abfragen (10 min)
-**11:35–11:45** *(alternativ zu Showcase, je nach Zeitbudget)*
+## Phase 4: Deploy & Ops (10 min)
+**11:20–11:30**
 
 ### Ziel
-Claude Code als DevOps-Assistent nutzen: Azure DevOps Work Items direkt aus dem Terminal abfragen und analysieren.
+Claude als DevOps-Brücke: Azure DevOps Work Items abfragen und mit Code verknüpfen.
 
 ### Vorbereitung
 ```bash
@@ -193,127 +169,25 @@ az extension add --name azure-devops
 
 ### Aufgabe
 
-1. **Offene Work Items auflisten** (3 min)
+1. **Work Items auflisten** (3 min)
    ```
-   Nutze die Azure CLI, um alle offenen Work Items im Kalkulationstool-Projekt aufzulisten.
-   Die Commands findest du in todo.md. Organisation: garaio-allpura, Projekt: Kalkulationstool.
+   Nutze die Azure CLI, um alle offenen Bugs aufzulisten.
+   Commands findest du in @todo.md.
    ```
-
-   Claude sollte die `az boards query` Befehle aus `todo.md` nutzen.
 
 2. **Bug-Report erstellen** (4 min)
    ```
-   Erstelle mir einen Report aller offenen Bugs:
-   - Titel, Severity, wem zugewiesen
-   - Wie lange offen (seit Erstelldatum)
-   - Empfehlung zur Priorisierung
+   Erstelle einen Bug-Report:
+   Titel, Severity, wie lange offen, Priorisierung.
    ```
 
+3. **Cross-Reference** (3 min)
    ```
-   Welche Work Items sind unassigned? 
-   Erstelle eine Übersicht mit Vorschlägen zur Zuweisung.
-   ```
-
-3. **Cross-Reference: Code ↔ Issues** (3 min)
-   ```
-   Nimm Bug #191 aus den Work Items.
-   Finde den zugehörigen Code und erkläre, 
-   ob unser Fix aus Exercise 2 das Problem löst.
+   Nimm Bug #191 — löst unser Fix das Problem?
    ```
 
 ### Takeaway
-> **AI als DevOps-Brücke**: Claude kann Work Items abfragen, mit Code verknüpfen, und Reports generieren — alles aus einer Oberfläche.
-> Keine Context-Switches zwischen Browser, Terminal und IDE mehr.
-
----
-
-## Exercise 5: MCP — Chrome DevTools Demo (10 min)
-**Moderator-Demo**
-
-### Ziel
-Verstehen, was MCP (Model Context Protocol) ist und wie es Claude Code mit externen Tools verbindet.
-
-### Was ist MCP?
-MCP ist ein offener Standard, der AI-Assistenten mit externen Datenquellen und Tools verbindet — wie USB für AI. Statt Claude manuell Befehle einzutippen, bekommt Claude **direkte Tool-Zugriffe**.
-
-### Setup: Chrome DevTools MCP
-
-Der offizielle **Chrome DevTools MCP Server** (von Google) gibt Claude Code direkten Zugriff auf Chrome DevTools — DOM, CSS, Console, Network, Performance Traces.
-
-```bash
-# Vor dem Start von Claude Code ausführen:
-claude mcp add chrome-devtools --scope project npx chrome-devtools-mcp@latest
-```
-
-Das erstellt automatisch die `.mcp.json` im Projekt. Beim nächsten `claude`-Start fragt Claude, ob der MCP-Server genutzt werden soll → bestätigen.
-
-Alternativ manuell als `.mcp.json` im Projekt-Root:
-```json
-{
-  "mcpServers": {
-    "chrome-devtools": {
-      "command": "npx",
-      "args": ["chrome-devtools-mcp@latest"]
-    }
-  }
-}
-```
-
-**Voraussetzungen:** Node.js 20+, Chrome/Chromium installiert.
-Läuft auf **Mac, Linux und Windows**.
-
-> Referenz: https://github.com/ChromeDevTools/chrome-devtools-mcp
-
-### Was kann der Chrome DevTools MCP?
-
-| Tool | Beschreibung |
-|------|-------------|
-| **Browser steuern** | Seiten öffnen, navigieren, User-Interaktionen simulieren |
-| **DOM & CSS inspizieren** | Elemente finden, Styling-Probleme diagnostizieren |
-| **Console & Network** | Fehler analysieren, CORS-Probleme finden, API-Calls prüfen |
-| **Performance Traces** | Aufnehmen, analysieren, Bottlenecks identifizieren |
-| **Screenshots** | Visuell verifizieren ob Änderungen korrekt sind |
-
-### Demo-Szenario (Kalkulationstool Frontend)
-
-1. **Seite prüfen** (3 min)
-   ```
-   Öffne localhost:4200 im Browser und prüfe ob es Styling-Probleme gibt.
-   ```
-   
-   → Claude öffnet Chrome, inspiziert DOM/CSS, meldet Findings
-
-2. **Fehler diagnostizieren** (3 min)
-   ```
-   Warum laden einige Elemente auf der Seite nicht?
-   Schau dir die Console Logs und Network-Requests an.
-   ```
-   
-   → Claude analysiert Console-Errors und fehlgeschlagene Requests
-
-3. **Performance Audit** (4 min)
-   ```
-   Die Seite lädt langsam. Mach einen Performance Audit 
-   und schlag konkrete Verbesserungen vor.
-   ```
-   
-   → Claude nimmt einen Performance Trace auf, analysiert LCP/CLS/FID
-
-### Weitere MCP-Server (Ausblick)
-
-| MCP Server | Use Case |
-|-----------|----------|
-| **Azure DevOps MCP** | Work Items, PRs, Pipelines direkt aus Claude |
-| **Supabase/Postgres MCP** | Live-DB-Abfragen für Debugging |
-| **Sentry MCP** | Error-Triage und Monitoring |
-| **Slack MCP** | Team-Kommunikation durchsuchen |
-
-→ Siehe **Handout: MCP Use Cases** für die vollständige Liste.
-
-### Takeaway
-> **MCP = USB für AI** — einmal eingesteckt, funktioniert es einfach.
-> Chrome DevTools MCP macht Claude zum **Full-Stack-Debugger**: Code lesen, ändern UND im Browser verifizieren.
-> In Kombination entsteht ein **geschlossener Loop**: Issue → Code → Test → Visuell prüfen → Deploy.
+> **Code ↔ Issues verknüpfen.** Keine Context-Switches zwischen Browser, Terminal und IDE.
 
 ---
 
@@ -328,7 +202,7 @@ Wie würdest du das fixen? Implementiere eine Lösung.
 ### Option B: Projekt-Dokumentation verbessern
 ```
 Die Wiki-Doku ist veraltet (nennt .NET 7 statt 8).
-Generiere eine aktualisierte Technical Specifications Seite 
+Generiere eine aktualisierte Technical Specifications Seite
 basierend auf dem aktuellen Code.
 ```
 
@@ -343,33 +217,18 @@ Schreib Tests für einen davon.
 
 ## Notizen für Moderator
 
-### Timing-Optionen (60 min Hands-On)
-Die 5 Exercises + Showcase passen nicht alle in 60 min. Empfohlene Kombinationen:
+### Timing
+Die Phasen sind in den Lifecycle integriert (60 min total):
+- Setup (5) + Req (10) + Spec (10) + Code+Test (15) + Security (10) + Deploy (10) = 60 min
 
-**Option A — Coding-Fokus (Standard):**
-- Ex 1 (10) + Ex 2 (20) + Ex 3 (15) + Showcase (10) = 55 min ✅
+Falls Zeit knapp: Security oder Deploy&Ops kürzen/weglassen.
 
-**Option B — DevOps-Fokus:**
-- Ex 1 (10) + Ex 2 (20) + Ex 4 (10) + Ex 5 Demo (10) + Showcase (10) = 60 min ✅
-
-**Option C — Alles anteasen (straff):**
-- Ex 1 (5) + Ex 2 (15) + Ex 3 (10) + Ex 4 (10) + Ex 5 Demo (5) + Showcase (10) = 55 min
-
-### Exercise 4 & 5 — Voraussetzungen
-- **Ex 4 (Azure CLI):** Teilnehmer brauchen `az login` + DevOps-Extension. Falls nicht möglich → als Live-Demo durch Moderator
-- **Ex 5 (MCP):** Am besten als **Moderator-Demo** — MCP Setup braucht Vorbereitung. Teilnehmer sehen den Effekt, ohne selbst konfigurieren zu müssen
-- **Fallback:** Wenn weder Azure CLI noch MCP verfügbar: die Befehle aus `todo.md` zeigen und erklären, wie Claude sie nutzt
+### Voraussetzungen
+- **Azure CLI:** Teilnehmer brauchen `az login` + DevOps-Extension. Falls nicht möglich → als Live-Demo durch Moderator
+- **Fallback:** Befehle aus `todo.md` zeigen und erklären, wie Claude sie nutzt
 
 ### Häufige Probleme
 - **Claude findet CLAUDE.md nicht**: `/init` ausführen, Working Directory prüfen, muss in `Kalkulationstool/` sein
 - **API läuft nicht**: Für Exercises nicht nötig, ist reines Code-Reading
 - **Teilnehmer stuck**: Beispiel-Prompts vorzeigen, Pair Programming
 - **`az boards` schlägt fehl**: Org/Projekt als Default setzen: `az devops configure --defaults organization=https://dev.azure.com/garaio-allpura project=Kalkulationstool`
-- **MCP startet nicht**: Node.js 20+ prüfen, `npx` muss verfügbar sein
-
-### Key Messages wiederholen
-1. **Explore → Plan → Code** (nicht direkt implementieren)
-2. **Verification First** (AI macht Fehler)
-3. **Context Engineering** (CLAUDE.md ist dein Freund)
-4. **MCP = USB für AI** (einmal eingesteckt, einfach nutzen)
-5. **Geschlossener Loop**: Issue → Code → Test → Deploy — alles aus einer Oberfläche

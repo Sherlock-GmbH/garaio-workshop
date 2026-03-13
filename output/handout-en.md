@@ -98,10 +98,13 @@ cd Kalkulationstool
 # Start Claude Code
 claude
 
-# Inside Claude, type:
+# Inside Claude, run /init to generate a CLAUDE.md:
+/init
+
+# Then ask:
 Was ist dieses Projekt? Gib mir einen kurzen Überblick.
 
-# Claude should read CLAUDE.md and explain the architecture
+# Claude should use the new CLAUDE.md and explain the architecture
 # Exit with Ctrl+C or /exit
 ```
 
@@ -115,7 +118,7 @@ Was ist dieses Projekt? Gib mir einen kurzen Überblick.
 - [ ] Azure DevOps Extension added (`az boards --help` works)
 - [ ] Logged in to GARAIO Azure tenant
 - [ ] Kalkulationstool repo cloned
-- [ ] Test run successful (Claude reads CLAUDE.md)
+- [ ] Test run successful (`/init` creates CLAUDE.md, Claude explains architecture)
 
 ---
 

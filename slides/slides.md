@@ -31,17 +31,16 @@ Und vor allem: ihr werdet heute selber coden. Mit Claude Code, eurem eigenen Rep
 
 | Block | Zeit | Inhalt |
 |-------|------|--------|
-| 🧠 Intro | 09:00–09:30 | Warum 95% scheitern |
-| 🛠️ Claude Code | 09:30–10:15 | Hands-On: Das Tool kennenlernen |
-| ☕ Pause | 10:15–10:30 | |
-| 🔄 AI-First Lifecycle | 10:30–11:15 | Req → Spec → Code → Test → Deploy → Ops |
-| 🏋️ Exercises | 11:15–11:55 | Bug Fix, Security, DevOps |
-| 💬 Wrap-Up | 11:55–12:15 | Showcase + Q&A |
+| 🧠 Intro | 08:30–09:00 | Warum 95% scheitern |
+| 🛠️ Claude Code | 09:00–10:00 | Hands-On: Das Tool kennenlernen |
+| ☕ Pause | 10:00–10:30 | |
+| 🔄 Lifecycle Hands-On | 10:30–11:30 | Req → Spec → Code → Test → Deploy → Ops |
+| 💬 Wrap-Up | 11:30–12:00 | Feedback + Q&A |
 
 <!--
 Das ist unser Plan für die nächsten 3 Stunden.
 
-Zuerst: Warum scheitern fast alle mit AI? Dann lernt ihr Claude Code kennen — hands-on, im echten Repo. Nach der Pause gehen wir den kompletten Lifecycle durch, Phase für Phase mit Demo. Und dann fixxt ihr selber Bugs und Security Issues.
+Zuerst: Warum scheitern fast alle mit AI? Dann lernt ihr Claude Code kennen — hands-on. Nach der Pause gehen wir den kompletten Lifecycle durch — und ihr macht bei jeder Phase sofort mit. Kein Zuschauen und dann nochmal machen, sondern: erklären, dann direkt coden.
 
 Wenn Teil 2 länger dauert, kürze ich bei Teil 3. Wichtiger ist, dass ihr das Tool versteht.
 -->
@@ -492,263 +491,16 @@ Falls ihr Fragen habt zu dem was wir bisher gemacht haben — jetzt ist ein gute
 layout: center
 ---
 
-# Teil 3: AI-First Lifecycle
+# Teil 3: AI-First Lifecycle — Hands-On
 
 ### Requirements → Spec → Code → Test → Deploy → Ops
-
-<!--
-Jetzt wird's konkret. Wir gehen den kompletten Lifecycle durch — von der Anforderung bis zum laufenden System. An jedem Schritt: wo arbeitet der Agent, wo der Mensch. Pro Phase eine kurze Demo.
--->
-
----
-
-# Requirements
-
-<div class="grid grid-cols-2 gap-8 mt-8">
-<div>
-
-### Mensch
-- Stakeholder-Gespräche
-- Business-Ziel definieren
-- Priorisierung
-
-</div>
-<div>
-
-### Agent
-- Bestehenden Code analysieren
-- Impact Assessment
-- Fragen generieren die ihr vergessen habt
-
-</div>
-</div>
-
-<br>
-
-**Demo:**
-```
-Lies Bug #191 in todo.md. Welche Fragen müsste ich dem
-Product Owner stellen, bevor ich das fixe?
-```
-
-<!--
-Requirements: Der Mensch definiert WAS und WARUM. Der Agent hilft beim Analysieren.
-
-(DEMO: Claude liest den Bug, analysiert den Code, generiert Rückfragen)
-
-Seht ihr — Claude stellt Fragen die ihr vielleicht nicht gestellt hättet. "Welche Zeitzonen sind relevant?" "Gibt es andere Stellen mit dem gleichen Pattern?" Das ist der Mehrwert: die AI denkt an Edge Cases.
-
-Aber die Entscheidung welche Requirements wichtig sind — das bleibt beim Menschen.
--->
-
----
-
-# Spec
-
-<div class="grid grid-cols-2 gap-8 mt-8">
-<div>
-
-### Mensch
-- Approach entscheiden
-- Risiken bewerten
-- Scope definieren
-
-</div>
-<div>
-
-### Agent
-- Spec schreiben (Explore → Plan)
-- Betroffene Dateien identifizieren
-- Alternativen vorschlagen
-
-</div>
-</div>
-
-<br>
-
-**Demo:**
-```
-/plan Schreib eine Spec für den Fix von Bug #191.
-Max 5 Punkte. Identifiziere betroffene Dateien.
-```
-
-<!--
-Spec: Der Agent schreibt einen Plan, der Mensch entscheidet ob er stimmt.
-
-(DEMO: /plan Modus — Claude analysiert und schreibt eine Spec)
-
-Wichtig: /plan Modus. Claude ändert nichts, es plant nur. Ihr seht den Plan, prüft ihn, und DANN gebt ihr grünes Licht.
-
-Das ist Explore → Plan in der Praxis. Nie direkt loscodieren.
--->
-
----
-
-# Code
-
-<div class="grid grid-cols-2 gap-8 mt-8">
-<div>
-
-### Mensch
-- Plan reviewen und freigeben
-- Diffs prüfen
-- Jede Änderung verstehen
-
-</div>
-<div>
-
-### Agent
-- Implementieren nach Spec
-- Tests zuerst schreiben
-- Refactoring vorschlagen
-
-</div>
-</div>
-
-<br>
-
-**Demo:**
-```
-Implementiere den Fix nach der Spec.
-Schreib zuerst einen Unit Test der das Problem reproduziert.
-```
-
-<!--
-Code: Jetzt wird implementiert. Aber — Test zuerst.
-
-(DEMO: Claude schreibt erst den Test, dann den Fix)
-
-Achtet darauf was Claude macht: Es schreibt erst einen Test der fehlschlägt, dann den Fix der den Test grün macht. Das ist TDD — und die AI macht es automatisch wenn ihr es so promptet.
-
-Und ihr seht jeden Diff. Akzeptiert nicht blind. Lest den Code. Verification First.
--->
-
----
-
-# Test
-
-<div class="grid grid-cols-2 gap-8 mt-8">
-<div>
-
-### Mensch
-- Test-Strategie definieren
-- Edge Cases identifizieren
-- Akzeptanzkriterien prüfen
-
-</div>
-<div>
-
-### Agent
-- Unit Tests schreiben
-- Integration Tests
-- Edge Cases abdecken
-- Tests ausführen und Fehler fixen
-
-</div>
-</div>
-
-<br>
-
-**Demo:**
-```
-Führe die Tests aus. Wenn einer fehlschlägt, analysiere warum
-und fixe es.
-```
-
-<br>
-
-> **Frontend-Testing:** [agent-browser.dev](https://agent-browser.dev/) — Agent steuert den Browser, testet UI visuell
-
-<!--
-Test: Die AI ist extrem gut darin Tests zu schreiben und auszuführen. Aber IHR definiert was getestet werden soll.
-
-(DEMO: Tests laufen lassen, ggf. Fehler fixen)
-
-Der Agent kann den Red-Green-Refactor Cycle komplett alleine durchlaufen. Aber die Frage "testen wir das Richtige?" — das ist euer Job.
-
-Für Frontend gibt's spannende Entwicklungen: agent-browser.dev — ein Tool das dem Agent einen echten Browser gibt. Der Agent kann die UI visuell testen, Screenshots machen, Buttons klicken. Nicht nur Unit Tests, sondern echtes E2E-Testing gesteuert vom Agent.
--->
-
----
-
-# Deploy & Ops
-
-<div class="grid grid-cols-2 gap-8 mt-8">
-<div>
-
-### Deploy
-- PR erstellen mit Summary
-- CI/CD Pipeline analysieren
-- Deployment-Risiken bewerten
-
-</div>
-<div>
-
-### Ops
-- Logs analysieren
-- Incidents debuggen
-- Monitoring-Queries schreiben
-- Post-Mortems unterstützen
-
-</div>
-</div>
-
-<br>
-
-> **Tools:** CLI-Tools (az cli, gh, kubectl) + DevOps MCP Server + Hooks für Automatisierung
-
-<!--
-Deploy und Ops: Hier kommt alles zusammen.
-
-Deploy: Claude kann PRs erstellen, CI/CD Pipelines analysieren, Deployment-Risiken bewerten. Dafür nutzt ihr CLI-Tools wie az cli oder gh — Claude kann die direkt aufrufen. Oder einen DevOps MCP Server der das nativ integriert.
-
-Ops: Logs analysieren, Incidents debuggen, Monitoring-Queries schreiben. Mit dem richtigen MCP-Server kann Claude direkt in Grafana oder Datadog schauen.
-
-Und dann Hooks: Ihr könnt deterministische Schritte automatisieren. Z.B. nach jedem Commit automatisch Linting laufen lassen. Oder nach jedem PR automatisch einen Security-Check triggern. Hooks sind der Klebstoff zwischen Agent und eurer Pipeline.
--->
-
----
-
-# Der geschlossene Loop
-
-```
-📋 Issue lesen        (DevOps MCP)
-   ↓
-🔍 Code verstehen     (Filesystem)
-   ↓
-🗄️ Daten prüfen       (DB MCP)
-   ↓
-💻 Fix implementieren  (Claude Code)
-   ↓
-✅ Tests schreiben     (Claude Code)
-   ↓
-🚀 PR erstellen        (DevOps MCP)
-   ↓
-📊 Monitoring prüfen   (Observability MCP)
-```
-
-> **Alles aus einer Oberfläche. Keine Context-Switches.**
-
-<!--
-Das ist die Vision: Ein geschlossener Loop. Vom Issue über Code und Tests bis zum PR und Monitoring. Alles in einem Tool.
-
-Ihr habt heute die Mitte kennengelernt — Code verstehen, Fix implementieren, Tests schreiben. Die äusseren Schichten kommen mit MCP-Servern dazu.
-
-Jetzt wendet ihr das Gelernte an.
--->
-
----
-layout: center
----
-
-# Teil 4: Exercises
 
 ### Echte Bugs. Echtes Repo. Echte Security Issues.
 
 <!--
-Jetzt wird's ernst. Ihr arbeitet mit dem echten Kalkulationstool-Repo. Echte Bugs, echte Security Issues — keine Spielzeug-Beispiele.
+Jetzt wird's konkret UND praktisch. Wir gehen den kompletten Lifecycle durch — und ihr macht bei jeder Phase sofort mit. Kein Zuschauen, dann nochmal machen. Sondern: kurz erklären, dann direkt hands-on.
 
-Nutzt den Explore-Plan-Code Workflow den ihr gerade gesehen habt.
+Öffnet euer Terminal, geht ins Kalkulationstool-Repo.
 -->
 
 ---
@@ -790,52 +542,180 @@ Wer Probleme hat: Hand hoch, wir helfen.
 
 ---
 
-# Exercise 1: Bug #191 fixen (20 min)
+# Phase 1: Requirements (10 min)
 
-### Auftragsbeginn-Datum fällt um 1 Tag zurück 🐛
+<div class="grid grid-cols-2 gap-8 mt-4">
+<div>
 
-**Explore** (5 min)
+### Mensch
+- Business-Ziel definieren
+- Priorisierung
+
+### Agent
+- Code analysieren
+- Fragen generieren die ihr vergessen habt
+
+</div>
+<div>
+
+### Hands-On: Bug #191 verstehen
 ```
-Lies todo.md und erkläre mir Bug #191.
-Wo wird ein Vertrag aus einer Offerte erstellt?
+Lies @todo.md und erkläre mir Bug #191.
 ```
 
-**Plan** (5 min)
 ```
-Was ist die wahrscheinliche Ursache?
-Schreib eine Spec (3-5 Punkte) für den Fix.
+Wo wird ein Vertrag aus einer Offerte
+erstellt?
 ```
 
-**Code** (10 min)
 ```
-Implementiere den Fix. Schreib zuerst einen Unit Test.
+Welche Fragen müsste ich dem Product
+Owner stellen, bevor ich das fixe?
 ```
+
+</div>
+</div>
 
 <!--
-Das ist die Haupt-Übung. Ein echter Bug: Wenn eine Offerte zum Vertrag umgewandelt wird, fällt das Auftragsbeginn-Datum um einen Tag zurück. Klassisches UTC/Timezone-Problem.
+Requirements: Der Mensch definiert WAS und WARUM. Der Agent hilft beim Analysieren.
 
-Wichtig: Nicht direkt loscodieren! Erst Explore — Claude soll den Bug erklären und den relevanten Code finden. Dann Plan — was ist die Ursache, wie fixen wir's. DANN erst Code — und zwar Test zuerst.
+Macht jetzt mit: Lest den Bug, lasst Claude den Code analysieren. Seht wie Claude Fragen generiert die ihr vielleicht nicht gestellt hättet. "Welche Zeitzonen sind relevant?" "Gibt es andere Stellen mit dem gleichen Pattern?"
 
-Ihr habt 20 Minuten. Das ist knapp — das ist Absicht. In der Praxis müsst ihr auch unter Zeitdruck entscheiden, wann "gut genug" ist.
+Das ist der Mehrwert: die AI denkt an Edge Cases. Aber die Entscheidung welche Requirements wichtig sind — das bleibt beim Menschen.
 -->
 
 ---
 
-# Exercise 2: Security Issue (15 min)
+# Phase 2: Spec (10 min)
 
-### Fehlende `[Authorize]` Attribute 🔒
+<div class="grid grid-cols-2 gap-8 mt-4">
+<div>
 
-1. **Audit lesen:** `Lies security-audit-report.md, Fokus auf Vulnerability #2`
-2. **Code finden:** `Welche Endpoints haben kein [Authorize]?`
-3. **Fix:** `Füge die fehlenden Attribute hinzu`
-4. **Review:** `Gibt es noch andere Stellen mit ähnlichen Problemen?`
+### Mensch
+- Approach entscheiden
+- Risiken bewerten
+- Scope definieren
+
+### Agent
+- Spec schreiben (Explore → Plan)
+- Betroffene Dateien identifizieren
+- Alternativen vorschlagen
+
+</div>
+<div>
+
+### Hands-On: Plan erstellen
+```
+/plan Schreib eine Spec für den Fix
+von Bug #191. Max 5 Punkte.
+Identifiziere betroffene Dateien.
+```
 
 <br>
 
-> **Takeaway:** AI findet Issues schnell — aber **du verifizierst**.
+**Prüft den Plan:**
+- Stimmt die Ursache?
+- Fehlen betroffene Dateien?
+- Ist der Scope realistisch?
+
+</div>
+</div>
 
 <!--
-Exercise 2: Security. Im Repo liegt ein Security Audit Report mit 4 Findings. Ihr fokussiert auf Vulnerability 2: fehlende Authorize-Attribute.
+Spec: Der Agent schreibt einen Plan, der Mensch entscheidet ob er stimmt.
+
+Wichtig: /plan Modus. Claude ändert nichts, es plant nur. Ihr seht den Plan, prüft ihn, und DANN gebt ihr grünes Licht.
+
+Das ist Explore → Plan in der Praxis. Nie direkt loscodieren.
+-->
+
+---
+
+# Phase 3: Code + Test (15 min)
+
+<div class="grid grid-cols-2 gap-8 mt-4">
+<div>
+
+### Mensch
+- Diffs prüfen
+- Jede Änderung verstehen
+
+### Agent
+- Tests zuerst schreiben
+- Implementieren nach Spec
+- Tests ausführen und Fehler fixen
+
+</div>
+<div>
+
+### Hands-On: Fix implementieren
+```
+Implementiere den Fix nach dem Plan.
+Schreib zuerst einen Unit Test der
+das Problem reproduziert.
+```
+
+```
+Führe die Tests aus. Wenn einer
+fehlschlägt, analysiere warum.
+```
+
+</div>
+</div>
+
+<br>
+
+> **Frontend-Testing:** [agent-browser.dev](https://agent-browser.dev/) — Agent steuert den Browser, testet UI visuell
+
+<!--
+Code und Test zusammen: erst der Test der fehlschlägt, dann der Fix der ihn grün macht. TDD — und die AI macht es automatisch wenn ihr es so promptet.
+
+Achtet darauf: Ihr seht jeden Diff. Akzeptiert nicht blind. Lest den Code. Verification First.
+
+Für Frontend gibt's agent-browser.dev — ein Tool das dem Agent einen echten Browser gibt. Screenshots, Buttons klicken, echtes E2E-Testing.
+-->
+
+---
+
+# Querschnitt: Security (15 min)
+
+### Fehlende `[Authorize]` Attribute 🔒
+
+<div class="grid grid-cols-2 gap-8 mt-4">
+<div>
+
+### Mensch
+- Fix korrekt? Ausreichend?
+- Andere Stellen betroffen?
+
+### Agent
+- Audit lesen, Code finden
+- Pattern-Matching über alle Files
+- Fix implementieren
+
+</div>
+<div>
+
+### Hands-On
+```
+/security-review
+```
+
+```
+Mach dasselbe für die gesamte
+Code-Base und speichere in
+security-audit-report.md
+```
+
+</div>
+</div>
+
+<br>
+
+> AI findet Issues schnell — aber **du verifizierst**.
+
+<!--
+Security ist ein Querschnitt der in jeder Lifecycle-Phase relevant ist. Hier seht ihr den Agent als Code-Auditor.
 
 Lasst Claude den Report lesen, den Code finden, und den Fix implementieren. Aber — und das ist der Punkt — IHR prüft ob der Fix korrekt ist. Nicht blind akzeptieren.
 
@@ -844,52 +724,98 @@ Security Reviews sind ein perfekter AI Use Case. Die AI findet Muster schneller 
 
 ---
 
-# Exercise 3: Azure CLI — Work Items (10 min)
+# Phase 4: Deploy & Ops (10 min)
 
-### Claude als DevOps-Assistent 🔧
+<div class="grid grid-cols-2 gap-8 mt-4">
+<div>
+
+### Mensch
+- Release-Entscheid treffen
+- Incident-Priorität bestimmen
+- Monitoring-Alerts bewerten
+
+### Agent
+- PRs erstellen, Pipelines analysieren
+- Logs durchsuchen, Incidents debuggen
+- Hooks für Automatisierung
+
+</div>
+<div>
+
+### Hands-On: Azure CLI
+```
+Nutze die Azure CLI, um alle offenen
+Bugs aufzulisten. Commands in @todo.md.
+```
 
 ```
-Nutze die Azure CLI, um alle offenen Bugs aufzulisten.
-Die Commands findest du in todo.md.
+Erstelle einen Bug-Report: Titel,
+Severity, wie lange offen.
 ```
 
 ```
-Erstelle einen Bug-Report:
-Titel, Severity, wie lange offen, Priorisierung.
+Nimm Bug #191 — löst unser Fix
+das Problem?
 ```
 
-```
-Nimm Bug #191 — löst unser Fix das Problem?
-```
+</div>
+</div>
 
 <br>
 
-> **Takeaway:** Code ↔ Issues verknüpfen. Keine Context-Switches.
+> **Tools:** CLI-Tools (az cli, gh, kubectl) + DevOps MCP Server + Hooks
 
 <!--
-Exercise 3: Wir nutzen Claude als DevOps-Brücke. In todo.md stehen Azure CLI Befehle für Azure DevOps Work Items.
+Deploy und Ops: Hier kommt alles zusammen. Claude kann CLI-Tools wie az cli oder gh direkt aufrufen. Oder einen DevOps MCP Server der das nativ integriert.
 
-Lasst Claude die Befehle nutzen, einen Bug-Report erstellen, und den Fix aus Exercise 1 mit dem Work Item verknüpfen.
+Lasst Claude die Befehle nutzen, einen Bug-Report erstellen, und den Fix mit dem Work Item verknüpfen. Das zeigt den Mehrwert: Claude versteht sowohl den Code als auch die Issues — ohne Context-Switches.
 
-Das zeigt den Mehrwert: Claude versteht sowohl den Code als auch die Issues. Es kann beides verbinden — ohne dass ihr zwischen Browser und IDE wechselt.
+Hooks automatisieren deterministische Schritte: nach jedem Commit Linting, nach jedem PR einen Security-Check. Hooks sind der Klebstoff zwischen Agent und Pipeline.
+-->
+
+---
+
+# Der geschlossene Loop
+
+```
+📋 Issue lesen        (az CLI / DevOps MCP)
+   ↓
+🔍 Code verstehen     (Filesystem)
+   ↓
+🗄️ Daten prüfen       (DB MCP)
+   ↓
+💻 Fix implementieren  (Claude Code)
+   ↓
+✅ Tests schreiben     (Claude Code)
+   ↓
+🚀 PR erstellen        (az CLI / DevOps MCP)
+   ↓
+📊 Monitoring prüfen   (devTools MCP)
+```
+
+> **Das habt ihr gerade gemacht.** Issue → Explore → Plan → Code → Test → DevOps. Alles aus einer Oberfläche.
+
+<!--
+Das ist der geschlossene Loop — und ihr habt ihn gerade selbst durchlaufen. Vom Bug lesen über Code verstehen, Plan schreiben, Fix implementieren, Tests, bis zum Work Item in Azure DevOps.
+
+Noch nicht komplett automatisiert — aber die Bausteine sind da. Mit MCP-Servern kommen die äusseren Schichten dazu.
 -->
 
 ---
 layout: center
 ---
 
-# Showcase
+# Feedback-Runde
 
-### 2-3 Freiwillige zeigen ihren Approach
-
-- Welche Fragen habt ihr gestellt?
-- Wo war Claude hilfreich, wo nicht?
-- Was hat euch überrascht?
+- Was hat funktioniert, was nicht?
+- Wo musstet ihr Claude korrigieren?
+- Wo seht ihr den grössten Hebel für euren Alltag?
+- Was war überraschend?
 
 <!--
-Wer möchte zeigen was er gemacht hat? 3 Minuten pro Person.
+Offene Runde. Mich interessiert euer ehrliches Feedback — nicht nur was gut lief, sondern vor allem wo es gehakt hat. Wo musstet ihr Claude korrigieren? Was hat überraschend gut oder schlecht funktioniert?
 
-Mich interessiert nicht nur die Lösung — mich interessiert der WEG. Welche Fragen habt ihr gestellt? Wo musstet ihr Claude korrigieren? Was war überraschend gut, was überraschend schlecht?
+Und die wichtigste Frage: Wo seht ihr den grössten Hebel für euren Alltag? Was nehmt ihr morgen mit?
 -->
 
 ---
@@ -923,15 +849,7 @@ Verification First — das Wichtigste. Context Engineering — CLAUDE.md gut pfl
 - 📄 **Claude Code Docs:** docs.anthropic.com/en/docs/claude-code
 - 🔌 **MCP Registry:** github.com/modelcontextprotocol/servers
 - 🏗️ **Azure DevOps MCP:** learn.microsoft.com/azure/devops/mcp-server
-- 📋 **MCP Use Cases Handout:** Habt ihr bekommen!
-
-<br>
-
-### Setup für morgen
-```bash
-curl -fsSL https://claude.ai/install.sh | bash   # Mac/Linux
-irm https://claude.ai/install.ps1 | iex            # Windows
-```
+- 📋 **Workshop-Repo:** github.com/Sherlock-GmbH/garaio-workshop
 
 <!--
 Hier sind die Links zum Weiterlesen. Das MCP Use Cases Handout habt ihr schon.
@@ -965,16 +883,16 @@ layout: center
 
 <br>
 
-Ich pflanze den Samen — den Garten legt ihr an.
+Wir haben heute die ersten Samen gepflanzt.
+Jetzt gilt es, den Garten anzulegen und zu pflegen.
 
 <br>
 
 **Lukas Haas** · Sherlock GmbH
 
 <!--
-Danke fürs Mitmachen. Ihr wisst jetzt mehr als 95% der Firmen die "AI machen".
+Danke fürs Mitmachen. Wir wissen jetzt mehr als 95% der Firmen die "AI machen".
 
-Der Rest liegt bei euch. Fangen klein an, iteriert, seid neugierig. Und prüft alles was die AI euch gibt.
+Der Rest liegt bei uns allen. Klein anfangen, iterieren, neugierig bleiben. Und alles prüfen was die AI uns gibt.
 
-Wenn ihr Fragen habt — ihr wisst wo ihr mich findet.
 -->

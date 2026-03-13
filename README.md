@@ -7,26 +7,28 @@ Workshop-Materialien für den 3-stündigen Claude Code Workshop.
 ### 🎬 slides/
 Slidev-Präsentation mit Speaker Notes:
 - **slides.md** — Komplettes Slidedeck (Slidev Markdown)
-- `npm run dev` zum Starten, `npm run export-pdf` für PDF
+- `pnpm run dev` zum Starten
 
 ### 📋 output/
 Fertige Workshop-Dokumente:
 - **drehbuch-3h.md** — Komplettes Drehbuch (Ablauf, Timing, Inhalte)
-- **exercises-kalkulationstool.md** — 5 Hands-On Exercises + Bonus
+- **exercises-kalkulationstool.md** — Hands-On Exercises + Bonus
 - **handout-en.md** — Setup-Guide für Teilnehmer (EN)
 - **handout-mcp-usecases.md** — MCP Use Cases Handout zum Mitnehmen
+- **referenz-claude-code.md** — Claude Code Kurzreferenz (Befehle, CLAUDE.md, Skills, MCP)
 - **key-messages.md** — Key Messages des Workshops
+- **todo.md** — Bug #191 + Azure DevOps CLI Commands für Demo
 
 ### 🔧 Demo-Repo (Kalkulationstool)
-Das Kalkulationstool-Repo ist **nicht** in diesem Repository enthalten.  
+Das Kalkulationstool-Repo ist **nicht** in diesem Repository enthalten.
 Teilnehmer clonen es direkt von Azure DevOps — siehe [Preparation Guide](output/handout-en.md).
 
 ## Slides starten
 
 ```bash
 cd slides
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 # → http://localhost:3030
 ```
 
@@ -40,4 +42,4 @@ Siehe [output/handout-en.md](output/handout-en.md) für die vollständige Setup-
 1. Claude Pro Subscription + Claude Code installieren
 2. Azure CLI + DevOps Extension installieren und einloggen
 3. Kalkulationstool-Repo von Azure DevOps clonen
-4. Quick-Test: `claude` im Repo starten
+4. Quick-Test: `claude` im Repo starten, `/init` ausführen

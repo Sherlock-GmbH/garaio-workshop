@@ -1,2 +1,4 @@
 node_modules/
 output/speaker-notes.*
+notes.md
+.claude/settings.local.json

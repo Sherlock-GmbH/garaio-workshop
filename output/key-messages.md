@@ -37,7 +37,7 @@
 - MCP (Model Context Protocol) verbindet Agents mit Tools
 - Skalierung durch Orchestrierung
 
-## Claude Cowork für Non-Coders
-- **PM, HR, Marketing** können mit Claude arbeiten
-- Kein Code nötig — natürliche Sprache reicht
-- AI demokratisiert Software-Erstellung
+## Geschlossener Loop
+- Issue → Code → Test → Deploy aus einer Oberfläche
+- CLI-Tools (az cli, gh) + MCP Server + Hooks
+- Keine Context-Switches mehr
