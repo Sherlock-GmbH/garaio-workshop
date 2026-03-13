@@ -4,6 +4,11 @@ Workshop-Materialien für den 3-stündigen Claude Code Workshop.
 
 ## Inhalt
 
+### 🎬 slides/
+Slidev-Präsentation mit Speaker Notes:
+- **slides.md** — Komplettes Slidedeck (Slidev Markdown)
+- `npm run dev` zum Starten, `npm run export-pdf` für PDF
+
 ### 📋 output/
 Fertige Workshop-Dokumente:
 - **drehbuch-3h.md** — Komplettes Drehbuch (Ablauf, Timing, Inhalte)
@@ -12,12 +17,20 @@ Fertige Workshop-Dokumente:
 - **handout-mcp-usecases.md** — MCP Use Cases Handout zum Mitnehmen
 - **key-messages.md** — Key Messages des Workshops
 
-### 📚 claude-code-tutorial/
-Vorbereitungsmaterialien, Notizen, Slides und Diagramme.
-
 ### 🔧 Demo-Repo (Kalkulationstool)
 Das Kalkulationstool-Repo ist **nicht** in diesem Repository enthalten.  
 Teilnehmer clonen es direkt von Azure DevOps — siehe [Preparation Guide](output/handout-en.md).
+
+## Slides starten
+
+```bash
+cd slides
+npm install
+npm run dev
+# → http://localhost:3030
+```
+
+Speaker Notes: Drücke `s` in der Präsentation für den Presenter-Modus.
 
 ## Vorbereitung
 
