@@ -240,8 +240,15 @@ MCP ist ein offener Standard, der AI-Assistenten mit externen Datenquellen und T
 
 Der offizielle **Chrome DevTools MCP Server** (von Google) gibt Claude Code direkten Zugriff auf Chrome DevTools — DOM, CSS, Console, Network, Performance Traces.
 
+```bash
+# Vor dem Start von Claude Code ausführen:
+claude mcp add chrome-devtools --scope project npx chrome-devtools-mcp@latest
+```
+
+Das erstellt automatisch die `.mcp.json` im Projekt. Beim nächsten `claude`-Start fragt Claude, ob der MCP-Server genutzt werden soll → bestätigen.
+
+Alternativ manuell als `.mcp.json` im Projekt-Root:
 ```json
-// .mcp.json im Projekt-Root
 {
   "mcpServers": {
     "chrome-devtools": {

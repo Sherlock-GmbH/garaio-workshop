@@ -199,8 +199,18 @@ Konfiguration: `/hooks` oder `.claude/settings.json`
 
 ## MCP (Model Context Protocol)
 
-MCP verbindet Claude mit externen Datenquellen und Tools. Konfiguration via `.mcp.json` im Projekt-Root:
+MCP verbindet Claude mit externen Datenquellen und Tools.
 
+### MCP hinzufügen
+
+```bash
+# MCP-Server zum Projekt hinzufügen (vor dem Start von Claude Code):
+claude mcp add chrome-devtools --scope project npx chrome-devtools-mcp@latest
+```
+
+Das erstellt automatisch die `.mcp.json` im Projekt. Beim nächsten `claude`-Start fragt Claude, ob der MCP-Server genutzt werden soll → bestätigen.
+
+Alternativ manuell als `.mcp.json` im Projekt-Root:
 ```json
 {
   "mcpServers": {
