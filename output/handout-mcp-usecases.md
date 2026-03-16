@@ -1,6 +1,18 @@
 # MCP — Killer Use Cases für Entwickler
+*Stand: März 2026*
 
 > **MCP (Model Context Protocol)** ist ein offener Standard, der AI-Assistenten mit externen Tools und Datenquellen verbindet — wie USB für AI. Einmal konfiguriert, kann Claude (oder jeder andere MCP-kompatible Assistant) direkt auf eure Systeme zugreifen.
+
+## 🌍 MCP ist Industrie-Standard
+
+MCP wurde November 2024 von Anthropic eingeführt und hat sich zum **universellen Standard** entwickelt:
+
+- **Adoptiert von:** Anthropic, OpenAI, Google, Microsoft, Amazon, Salesforce
+- **97 Millionen monatliche SDK-Downloads** (Python + TypeScript, Stand Feb 2026)
+- Dezember 2025: Übergabe an die **Linux Foundation** (Agentic AI Foundation)
+- Unterstützt in: Claude Code, ChatGPT, Gemini, Copilot, Cursor, VS Code, Windsurf
+
+Ein MCP Server den ihr für Claude baut, funktioniert automatisch auch mit ChatGPT, Copilot & Co.
 
 ## Setup (30 Sekunden)
 
@@ -110,9 +122,55 @@ Issue (DevOps MCP)
 
 ---
 
+---
+
+## 🔝 Die beliebtesten MCP Server 2026
+
+| Server | Beschreibung |
+|--------|-------------|
+| **Context7** | Injiziert versionsspezifische Docs & Code-Beispiele direkt in Prompts |
+| **Playwright** | Deterministische Browser-Automation via Accessibility Snapshots |
+| **Sentry** | Production Error Tracking (gehostet, kein Install nötig) |
+| **Firecrawl** | Web Scraping als MCP Tool |
+| **Atlassian** | Jira/Confluence Integration (Docker + Streamable HTTP) |
+| **Postgres/Supabase** | Direkter DB-Zugriff aus dem Agent |
+
+Kuratierte Liste mit 50+ Servern: https://claudefa.st/blog/tools/mcp-extensions/best-addons
+
+---
+
+## 📰 Was gerade passiert (März 2026)
+
+### 2026 Roadmap (veröffentlicht 12. März)
+Vier Prioritäten der MCP-Maintainer:
+
+1. **Transport Evolution** — SSE wird deprecated, Migration zu **Streamable HTTP** (Deadline: 1. April 2026). Stateless Sessions für horizontales Scaling. `.well-known` Discovery.
+2. **Agent Communication** — Tasks Primitive (SEP-1686) experimentell live. Retry-Semantik und Expiry Policies.
+3. **Governance** — Working Groups können SEPs selbst akzeptieren. Contributor Ladder.
+4. **Enterprise Readiness** — Audit Trails, SSO-Auth, Gateway Behavior.
+
+### Neue SDKs
+- **Microsoft MCP C# SDK v1.0** — Full Spec Support inkl. OAuth 2.1, Elicitation, Tool Icons
+- **Elicitation**: MCP Server können jetzt strukturierten User-Input anfordern während der Tool-Ausführung
+
+### ⚠️ Security — Das muss man wissen
+- **30 CVEs in 60 Tagen** — MCP Security ist ein aktives Problemfeld
+- **8'000+ MCP Server exposed** (öffentlich erreichbar ohne Auth)
+- Hauptrisiken:
+  - **Tool Poisoning**: Malicious Instructions in Tool-Descriptions → Agent exfiltriert Daten
+  - **Confused Deputy**: Zu breite Token-Scopes erlauben Zugriff über legitime Tools
+  - **Prompt Injection** über manipulierte Tool-Responses
+- **Best Practice**: MCP Server immer lokal oder hinter Auth betreiben, Tokens minimal scopen
+- Guide: [Securing MCP: Defense-First Architecture](https://christian-schneider.net/blog/securing-mcp-defense-first-architecture/)
+
+---
+
 ## Ressourcen
 
-- **MCP Spec:** https://modelcontextprotocol.io
+- **MCP Spec & Roadmap:** https://modelcontextprotocol.io
 - **MCP Server Registry:** https://github.com/modelcontextprotocol/servers
+- **MCP Roadmap Blog Post:** https://blog.modelcontextprotocol.io/posts/2026-mcp-roadmap/
 - **Azure DevOps MCP:** https://learn.microsoft.com/azure/devops/mcp-server
 - **Claude Code Docs:** https://docs.anthropic.com/en/docs/claude-code
+- **MCP Security Risks (Veeam):** https://www.veeam.com/blog/model-context-protocol-security-risks.html
+- **MCP vs A2A Vergleich:** https://dev.to/pockit_tools/mcp-vs-a2a-the-complete-guide-to-ai-agent-protocols-in-2026-30li
