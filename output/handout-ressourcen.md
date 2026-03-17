@@ -22,7 +22,6 @@
 | [Claude Code for Product Managers](https://www.sachinrekhi.com/p/claude-code-for-product-managers) | Der Referenz-Artikel für PMs — PRDs, Prototyping, Analytics |
 | [Claude Cowork: The Ultimate Guide for PMs](https://www.productcompass.pm/p/claude-cowork-guide) | Cowork als visueller Einstieg — Emails, Contracts, Invoices |
 | [13 Claude Code Projects That Changed My PM Role](https://medium.com/@ondrej.machart/13-claude-code-projects-that-changed-my-product-manager-role-over-the-last-6-months-7057b9045d51) | PM baut eigene Tools mit Claude Code, 0 Code-Wissen nötig |
-| [PM running entire practice through Claude Code (200+ Commits, 0 Code)](https://github.com/anthropics/claude-code/issues/30227) | GitHub Issue: Nicht-technischer PM-Workflow mit Decision Logs und PRDs |
 | [Stop re-explaining your product to AI — Build a Skill instead](https://designproject.io/blog/how-to-build-custom-claude-code-skills-and-why-your-team-needs-them/) | Skills für Teams — auch ohne Dev-Hintergrund erstellbar |
 
 ---
@@ -48,9 +47,7 @@
 
 | Ressource | Beschreibung |
 |-----------|-------------|
-| [Agent Teams: The Complete Guide](https://claudefa.st/blog/guide/agents/agent-teams) | Parallele Sub-Agents mit Dependency Tracking |
-| [Agent Teams Best Practices & Troubleshooting](https://claudefa.st/blog/guide/agents/agent-teams-best-practices) | Prompts, Use Cases, Token-Kosten |
-| [Complete Guide to All 12 Hook Lifecycle Events](https://claudefa.st/blog/tools/hooks/hooks-guide) | Von PreToolUse bis SessionEnd |
+| [From Tasks to Swarms: Agent Teams in Claude Code](https://alexop.dev/posts/from-tasks-to-swarms-agent-teams-in-claude-code/) | Agent Teams — koordinierte Sessions mit Shared Tasks und Direct Messaging |
 | [5 Production Hooks From Scratch](https://blakecrosley.com/blog/claude-code-hooks-tutorial) | Auto-Format, Lint, Block-Rules — hands-on |
 
 ---
@@ -62,16 +59,6 @@
 - **Release Notes**: https://docs.anthropic.com/en/release-notes/claude-code
 - **Official Plugins**: https://github.com/anthropics/claude-plugins-official
 - **Plugin Dev Kit**: https://github.com/anthropics/claude-code/tree/main/plugins
-
----
-
-## 🎥 Videos
-
-| Video | Beschreibung |
-|-------|-------------|
-| [Claude Code for Product Managers — Sachin Rekhi](https://www.youtube.com/watch?v=zsAAaY8a63Q) | Workflows in Action + Custom Skill bauen |
-| [Claude Code + Analytics Masterclass](https://www.youtube.com/watch?v=WK0bZrS8pVs) | PM-Workflow mit MCP, Dashboards, Feedback-Synthese |
-| [Claude Code — Full Tutorial for Beginners](https://www.youtube.com/watch?v=ntDIxaeo3Wg) | Kompletter Walkthrough von Null |
 
 ---
 
