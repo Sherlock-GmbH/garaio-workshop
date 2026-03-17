@@ -15,7 +15,10 @@ Fertige Workshop-Dokumente:
 - **exercises-kalkulationstool.md** — Hands-On Exercises + Bonus
 - **handout-en.md** — Setup-Guide für Teilnehmer (EN)
 - **handout-mcp-usecases.md** — MCP Use Cases Handout zum Mitnehmen
+- **handout-ressourcen.md** — Kuratierte Links & Ressourcen
 - **referenz-claude-code.md** — Claude Code Kurzreferenz (Befehle, CLAUDE.md, Skills, MCP)
+- **workflow-prompts-guide.md** — Prompt-Beispiele nach Rolle (Dev / Tester / PM)
+- **security-considerations.md** — Security-Aspekte beim Einsatz von AI Agents
 - **key-messages.md** — Key Messages des Workshops
 - **todo.md** — Bug #191 + Azure DevOps CLI Commands für Demo
 

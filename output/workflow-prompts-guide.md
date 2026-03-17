@@ -322,62 +322,11 @@ create a technical health dashboard summary for the team
 
 ---
 
-## Quick Reference: Slash Commands & Shortcuts
+## Quick Reference
 
-| Aktion | Command |
-|--------|---------|
-| Plan Mode an/aus | `Shift+Tab` (2x) |
-| Auto-Accept an/aus | `Shift+Tab` (1x) |
-| Kontext zurücksetzen | `/clear` |
-| Kontext komprimieren | `/compact` |
-| CLAUDE.md generieren | `/init` |
-| Berechtigungen | `/permissions` |
-| Hooks einrichten | `/hooks` |
-| Subagents anzeigen | `/agents` |
-| Plan im Editor öffnen | `Ctrl+G` |
-| Claude stoppen | `Esc` |
-| Rewind (undo) | `Esc + Esc` |
-| Fortsetzen | `claude -c` |
-| Einmal-Aufgabe | `claude "task"` |
-| Headless | `claude -p "query"` |
-| Git Commit | `claude commit` |
+Slash Commands, Shortcuts, Anti-Patterns und Subagents: siehe [Kurzreferenz Claude Code](referenz-claude-code.md).
 
 ---
 
-## Anti-Patterns → Best Practices
-
-| ❌ Don't | ✅ Do |
-|----------|-------|
-| Eine endlose Session für alles | `/clear` zwischen Tasks |
-| Claude 3x korrigieren | `/clear` + besserer Prompt |
-| Sofort coden ohne Plan | Explore → Plan → Code |
-| "Sieht ok aus" → Ship it | Tests + Verification IMMER |
-| "Untersuche die ganze Codebase" | Scope eingrenzen oder Subagent |
-| CLAUDE.md mit 500 Zeilen | Unter 100 Zeilen, Rest in Skills |
-
----
-
-## Subagents: Spezialisierte Helfer
-
-Subagents laufen in eigenem Kontext — ideal für isolierte Aufgaben:
-
-```
-use a subagent to review this code for security issues
-```
-```
-have the debugger subagent investigate why users can't log in
-```
-```
-use the explorer subagent to map all database queries in the project
-```
-
-**Custom Subagents** für euer Team (`.claude/agents/`):
-- `security-reviewer.md` — Security Audit
-- `test-generator.md` — Test-Erstellung
-- `spec-verifier.md` — Spec vs. Implementation prüfen
-- `onboarding-guide.md` — Neue Teammitglieder einarbeiten
-
----
-
-> 💡 **Goldene Regel:** Wenn du nicht weiterkommst, frag Claude einfach direkt:
+> Wenn du nicht weiterkommst, frag Claude einfach direkt:
 > `"wie mache ich X?"` — Claude kennt seine eigenen Features besser als jedes Dokument.

@@ -4,6 +4,10 @@ Diese Exercises sind in den AI-First Lifecycle integriert. Pro Phase: kurz erkl�
 
 ---
 
+**Siehe auch:** [Workflow Prompts Guide](workflow-prompts-guide.md) — Prompt-Beispiele für jede Phase, nach Rolle (Dev / Tester / PM).
+
+---
+
 ## Setup & Init (5 min)
 **10:30–10:35**
 
@@ -118,6 +122,25 @@ Fix implementieren. Test zuerst.
    Führe die Tests aus. Wenn einer fehlschlägt,
    analysiere warum und fixe es.
    ```
+
+4. **Bonus: Browser-Testing mit MCP** (optional)
+
+   Claude Code verlassen (`exit` oder `Ctrl+C`), dann im Terminal:
+   ```bash
+   claude mcp add chrome-devtools --scope project npx chrome-devtools-mcp@latest
+   ```
+
+   Claude neu starten — mit `-c` (letzte Session fortsetzen) oder `-r` (Session auswählen):
+   ```bash
+   claude -c
+   ```
+
+   Dann im Claude-Prompt:
+   ```
+   Öffne localhost:4200 im Browser und prüfe ob das Datum korrekt angezeigt wird.
+   ```
+
+   > **Hinweis:** MCP Server können nur **ausserhalb** einer laufenden Session hinzugefügt werden. Nach dem Neustart erkennt Claude die `.mcp.json` automatisch.
 
 ### Takeaway
 > **Verification First** — Tests VOR dem Merge. Jeden Diff prüfen.
