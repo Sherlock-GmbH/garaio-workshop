@@ -54,7 +54,7 @@
 
 ## 📖 Offizielle Anthropic Dokumentation
 
-- **Claude Code Docs**: https://docs.anthropic.com/en/docs/claude-code
+- **Claude Code Docs**: https://code.claude.com/docs/en/
 - **Hooks Guide**: https://docs.anthropic.com/en/docs/claude-code/hooks-guide
 - **Release Notes**: https://docs.anthropic.com/en/release-notes/claude-code
 - **Official Plugins**: https://github.com/anthropics/claude-plugins-official
@@ -85,6 +85,7 @@
 
 - **Vergleichs-Artikel**: [Claude Code vs. GitHub Copilot: A Real Developer Comparison](https://codegen.com/blog/claude-code-vs-github-copilot/) (Codegen, März 2026)
 - **Benchmark-Übersicht**: [Claude Code vs Copilot: Terminal Agent vs Multi-Model Platform](https://www.morphllm.com/comparisons/claude-code-vs-copilot) (Morph, März 2026)
+- **Analyse**: [Why Claude Code Won (for now)](https://alexisgallagher.com/posts/2026/why-claude-code-won/) — Warum CLI das richtige Paradigma für AI Agents ist
 - **Community**: [r/ClaudeCode](https://www.reddit.com/r/ClaudeCode/) — aktive Community mit täglichen Workflow-Posts
 
 ---
